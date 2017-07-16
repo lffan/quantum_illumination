@@ -1,0 +1,13 @@
+*.pdf
+*.jpg
+*.pyc
+*.bib
+*.tex
+*.sty
+*.dat
+*.npz
+*.csv
+test.*
+.ipynb_checkpoints
+__pycache__
+slides
