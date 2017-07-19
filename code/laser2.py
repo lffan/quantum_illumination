@@ -2,19 +2,19 @@
 # Created on 2017-07-18
 # Modified on 2017-07-18
 
-""" two-mode laser """
+"""two-mode laser class and utils"""
 
 __author__ = 'Longfei Fan'
 
 
-from qutip import *
 import numpy as np
+from qutip import *
 
 
 class LaserTwoMode(object):
     """A class for two-mode lasers"""
     
-    def __init__(self, state, l, n_max, rt=False):
+    def __init__(self, name, l, n_max, rt=False):
         """
         To initialize a two-mode state.
         
@@ -36,18 +36,22 @@ class LaserTwoMode(object):
         ValueError:
             when paras are not valid
         """
+        self.name = name
+        self.lmd = l
+        self.n_max = n_max
+        
         if n_max > 0:
-            if state == 'TMSS':
+            if name == 'TMSS':
                 self.state, self.aver_n = self.__TMSS(l, n_max)
-            elif state == 'PS':
+            elif name == 'PS':
                 self.state, self.aver_n = self.__PS(l, n_max)
-            elif state == 'PA':
+            elif name == 'PA':
                 self.state, self.aver_n = self.__PA(l, n_max)
-            elif state == 'PSA':
+            elif name == 'PSA':
                 self.state, self.aver_n = self.__PSA(l, n_max)
-            elif state == 'PAS':
+            elif name == 'PAS':
                 self.state, self.aver_n = self.__PAS(l, n_max)
-            elif state == 'PCS':
+            elif name == 'PCS':
                 self.state, self.aver_n = self.__PCS(l, n_max, rt)
             else:
                 raise ValueError('\'{}\' is not a valid name of two mode state!'.format(state))
@@ -167,6 +171,10 @@ class LaserTwoMode(object):
         return state, aver_n
     
     
+    def get_name(self):
+        return self.name
+    
+    
     def get_state(self):
         return self.state
     
@@ -177,6 +185,14 @@ class LaserTwoMode(object):
     
     def vn_entropy(self):
         return entropy_vn(self.state.ptrace(0))
+    
+    
+    def mixing(self, s):
+        op_mix = tm_mix(self.n_max, s)
+        self.state = op_mix * self.state * op_mix.dag()
+    
+    
+
         
         
         

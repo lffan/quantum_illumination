@@ -1,3 +1,5 @@
+# in developing
+
 from QI import *
 
 Nth = 0.1     # Average thermal photon numbers

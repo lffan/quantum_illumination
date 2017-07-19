@@ -17,127 +17,127 @@ from scipy.special import comb, factorial
 # two-mode operator ==========================================================
 
 
-def tm_squeezing(N, s):
-    """ Two-mode squeezing operator
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        return: a qutip.Qobj(), operator
-    """
-    a = destroy(N)
-    tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
-    return tms.expm()
+# def tm_squeezing(N, s):
+#     """ Two-mode squeezing operator
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         return: a qutip.Qobj(), operator
+#     """
+#     a = destroy(N)
+#     tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
+#     return tms.expm()
 
 
-def tm_mixing(N, s):
-    """ Two-mode mixing operator (Beam splitter)
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. The squeezed parameter
-        return: a qubit.Qobj(), operator
-    """
-    a = destroy(N)
-    tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
-    return tmm.expm()
+# def tm_mixing(N, s):
+#     """ Two-mode mixing operator (Beam splitter)
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. The squeezed parameter
+#         return: a qubit.Qobj(), operator
+#     """
+#     a = destroy(N)
+#     tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
+#     return tmm.expm()
 
 
 # one-mode states ==========================================================
 
 
-def cohe(N, alpha):
-    """ Coherent states
-        N: truncted photon number
-        alpha: complex number (eigenvalue) for requested coherent state
-    """
-    return coherent_dm(N, alpha)
+# def cohe(N, alpha):
+#     """ Coherent states
+#         N: truncted photon number
+#         alpha: complex number (eigenvalue) for requested coherent state
+#     """
+#     return coherent_dm(N, alpha)
 
 
 # two-mode states ==========================================================
 
 
-def TMSS(N, l):
-    """ Two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e [0, N-1]
-        s: a complex number. 's' is the squeezing parameter.
-        l: l = tanh(s)
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    state = np.sum([l**n * tensor(basis(N, n), basis(N, n)) \
-                    for n in xrange(N)])
-    return state.unit()
+# def TMSS(N, l):
+#     """ Two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e [0, N-1]
+#         s: a complex number. 's' is the squeezing parameter.
+#         l: l = tanh(s)
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     state = np.sum([l**n * tensor(basis(N, n), basis(N, n)) \
+#                     for n in xrange(N)])
+#     return state.unit()
 
 
-def p_sub(N, l):
-    """ Photon subtracted two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    state = np.sum([(n+1) * l**n * tensor(basis(N, n), basis(N, n)) \
-                    for n in xrange(N)])
-    return state.unit()
+# def p_sub(N, l):
+#     """ Photon subtracted two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     state = np.sum([(n+1) * l**n * tensor(basis(N, n), basis(N, n)) \
+#                     for n in xrange(N)])
+#     return state.unit()
 
 
-def p_add(N, l):
-    """ Photon added two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    state = np.sum([(n+1) * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
-                    for n in xrange(N - 1)])
-    return state.unit()    
+# def p_add(N, l):
+#     """ Photon added two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     state = np.sum([(n+1) * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
+#                     for n in xrange(N - 1)])
+#     return state.unit()    
 
 
-def p_sub_add(N, l):
-    """ Photon added then subtracted two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n), basis(N, n)) \
-                    for n in xrange(N)])
-    return state.unit()
+# def p_sub_add(N, l):
+#     """ Photon added then subtracted two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n), basis(N, n)) \
+#                     for n in xrange(N)])
+#     return state.unit()
 
 
-def p_add_sub(N, l):
-    """ Photon subtracted then added two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
-                    for n in xrange(N - 1)])
-    return state.unit()
+# def p_add_sub(N, l):
+#     """ Photon subtracted then added two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
+#                     for n in xrange(N - 1)])
+#     return state.unit()
 
 
-def p_cohe_sub_add(N, l, rt_list):
-    """ Coherent superposition of photon subtraction and addition 
-        on two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
-        r: complex numbers.
-        return: a qutip.Qobj(), vector state
-    """
-    # l = np.tanh(s.real)
-    ta, ra, tb, rb = rt_list
+# def p_cohe_sub_add(N, l, rt_list):
+#     """ Coherent superposition of photon subtraction and addition 
+#         on two-mode squeezed state
+#         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+#         s: a complex number. 's' is the squeezing parameter.
+#         r: complex numbers.
+#         return: a qutip.Qobj(), vector state
+#     """
+#     # l = np.tanh(s.real)
+#     ta, ra, tb, rb = rt_list
     
-    nlist = range(N)
-    state1 = np.sum([l**(n+1) * (n+1) * tensor(basis(N, n), basis(N, n)) \
-                    for n in nlist])
-    state2 = np.sum([l**(n+1) * np.sqrt((n+1)*(n+2)) \
-                    * tensor(basis(N, n), basis(N, n + 2)) for n in nlist[:-2]])
-    state3 = np.sum([l**(n+1) * np.sqrt((n+1)*(n+2)) \
-                    * tensor(basis(N, n + 2), basis(N, n)) for n in nlist[:-2]])
-    state4 = np.sum([l**n * (n+1) * tensor(basis(N, n + 1), basis(N, n + 1)) \
-                    for n in nlist[:-1]])
-    state = ta * tb * state1 + ta * rb * state2 + \
-            ra * tb * state3 + ra * rb * state4
+#     nlist = range(N)
+#     state1 = np.sum([l**(n+1) * (n+1) * tensor(basis(N, n), basis(N, n)) \
+#                     for n in nlist])
+#     state2 = np.sum([l**(n+1) * np.sqrt((n+1)*(n+2)) \
+#                     * tensor(basis(N, n), basis(N, n + 2)) for n in nlist[:-2]])
+#     state3 = np.sum([l**(n+1) * np.sqrt((n+1)*(n+2)) \
+#                     * tensor(basis(N, n + 2), basis(N, n)) for n in nlist[:-2]])
+#     state4 = np.sum([l**n * (n+1) * tensor(basis(N, n + 1), basis(N, n + 1)) \
+#                     for n in nlist[:-1]])
+#     state = ta * tb * state1 + ta * rb * state2 + \
+#             ra * tb * state3 + ra * rb * state4
     
-    return state.unit()
+#     return state.unit()
 
 
 # calculate lambda from average photon numbers =============================
