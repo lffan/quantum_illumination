@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Created on 2016-07-04
 # Modified on 2016-11-30
-# Backed up on 2017-01-19
+# Backup on 2017-07-24
 
 """ Quantum Illumination with Non-Gaussian States """
 
@@ -16,6 +16,7 @@ from scipy.special import comb, factorial
 
 
 # two-mode operator ==========================================================
+
 
 def tm_squeezing(N, s):
     """ Two-mode squeezing operator
@@ -39,18 +40,31 @@ def tm_mixing(N, s):
     return tmm.expm()
 
 
+# one-mode states ==========================================================
+
+
+def cohe(N, alpha):
+    """ Coherent states
+        N: truncted photon number
+        alpha: complex number (eigenvalue) for requested coherent state
+    """
+    return coherent_dm(N, alpha)
+
+
 # two-mode states ==========================================================
+
 
 def TMSS(N, l):
     """ Two-mode squeezed state
-        N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
+        N: a positive interger. Photon number is truncated at N, i.e [0, N-1]
         s: a complex number. 's' is the squeezing parameter.
+        l: l = tanh(s)
         return: a qutip.Qobj(), vector state
     """
     # l = np.tanh(s.real)
     state = np.sum([l**n * tensor(basis(N, n), basis(N, n)) \
                     for n in xrange(N)])
-    return state.unit(sparse=True)
+    return state.unit()
 
 
 def p_sub(N, l):
@@ -62,7 +76,7 @@ def p_sub(N, l):
     # l = np.tanh(s.real)
     state = np.sum([(n+1) * l**n * tensor(basis(N, n), basis(N, n)) \
                     for n in xrange(N)])
-    return state.unit(sparse=True)
+    return state.unit()
 
 
 def p_add(N, l):
@@ -74,7 +88,7 @@ def p_add(N, l):
     # l = np.tanh(s.real)
     state = np.sum([(n+1) * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
                     for n in xrange(N - 1)])
-    return state.unit(sparse=True)    
+    return state.unit()    
 
 
 def p_sub_add(N, l):
@@ -86,7 +100,7 @@ def p_sub_add(N, l):
     # l = np.tanh(s.real)
     state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n), basis(N, n)) \
                     for n in xrange(N)])
-    return state.unit(sparse=True)
+    return state.unit()
 
 
 def p_add_sub(N, l):
@@ -98,7 +112,7 @@ def p_add_sub(N, l):
     # l = np.tanh(s.real)
     state = np.sum([(n+1)**2 * l**n * tensor(basis(N, n + 1), basis(N, n + 1)) \
                     for n in xrange(N - 1)])
-    return state.unit(sparse=True)
+    return state.unit()
 
 
 def p_cohe_sub_add(N, l, rt_list):
@@ -124,7 +138,7 @@ def p_cohe_sub_add(N, l, rt_list):
     state = ta * tb * state1 + ta * rb * state2 + \
             ra * tb * state3 + ra * rb * state4
     
-    return state.unit(sparse=True)
+    return state.unit()
 
 
 # calculate lambda from average photon numbers =============================
@@ -132,10 +146,11 @@ def p_cohe_sub_add(N, l, rt_list):
 
 # rho_0 and rho_1 ==========================================================
 
+
 def RHO_0(state, N, l, Nth, rt_list=False):
     """ State obtained if the object is absent.
         N: a positive interger. Photon number is truncated at N, i.e (0, N-1)
-        s: a complex number. 's' is the squeezing parameter.
+        l: a complex number. 'l' is the squeezing parameter.
         r: complex numbers.
         return: a qutip.Qobj(), density matrix
     """
@@ -195,7 +210,26 @@ def RHO_1(state, N, l, Nth, kappa, rt_list=False):
     return rho_1.ptrace([0, 1])
 
 
-# upper bound and lower bound ========================================
+# Helstrom, upper bound (QCB) and lower bound ========================
+
+
+def Helstrom(pi_0, rho_0, pi_1, rho_1, M=1):
+    """ Calculate Helstrom error probability
+        which is defined as
+            
+            P_e = 0.5 (1 - ||p1 * rho1 - p0 * rho0||)
+            
+        pi_0, rho_0: state 1 and its a priori probability pi_0
+        pi_1, rho_1: state 2 and its a priori probability pi_1
+        M: number of copies
+    """
+    if M == 1:
+        gamma = pi_1 * rho_1 - pi_0 * rho_0
+    else:
+        pass
+    return 0.5 squeezed parameter* (1 - gamma.norm())
+        
+    
 
 def QCB(rho_0, rho_1, approx=False):
     """ Approximated Q for QCB

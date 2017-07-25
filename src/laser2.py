@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Created on 2017-07-18
-# Modified on 2017-07-24
+# Last Modified on 2017-07-18
+# Latest Modified on 2017-07-24
 
 """ two-mode laser, TMSS and non-Gaussian states """
 
@@ -14,7 +15,7 @@ import numpy as np
 class LaserTwoMode(object):
     """A class for two-mode lasers"""
     
-    def __init__(state_name):
+    def __init__(state_name, n_max):
         """
         To initialize a two-mode state.
         
@@ -34,6 +35,40 @@ class LaserTwoMode(object):
             self.state = None
         else:
             raise ValueError('{} is not a valid name of two mode state!'.format())
+    
+    def __tm_sqz(self, s):
+        """
+        Two mode mixing operator in the form of matrix with Fock basis
+        
+        Parameters
+        ----------
+        s: a complex number
+            The squeezed parameter
+        
+        Return
+        ------
+        qubit.Qobj()
+        """
+        a = destroy(N)
+        tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
+        return tms.expm()
+    
+    def __tm_mix(self, s)
+        """
+        Two-mode mixing operator (Beam splitter)
+        
+        Parameters
+        ----------
+        s: a complex number
+            The mixing parameter
+        
+        Return
+        ------
+        qubit.Qobj()
+        """
+        a = destroy(N)
+        tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
+        return tmm.expm()        
         
     
 class TMSS(LaserTwoMode):
@@ -54,7 +89,7 @@ class TMSS(LaserTwoMode):
         a qutip object, a TMSS in bra form (column vector)
     """
     def __init__(name, l, n_max):
-        super.__init__(name)
+        super.__init__(name, n_max)
         self.state = np.sum([l**n * tensor(basis(n_max, n), basis(n_max, n)) 
                              for n in range(n_max)])
     
@@ -77,7 +112,7 @@ class PS(LaserTwoMode):
         a qutip object, a photon subtracted state in bra form
     """
     def __init__(name, l, n_max):
-        super().__init__(name)
+        super().__init__(name, n_max)
         self.state = np.sum([(n+1) * l**n * tensor(basis(n_max, n), basis(n_max, n)) 
                         for n in range(n_max)])
     
@@ -99,22 +134,23 @@ class PA(LaserTwoMode):
         a qutip object, a photon added state in bra form
     """
     def __init__(name, l, n_max):
-        super().__init__(name)
+        super().__init__(name, n_max)
         self.state = np.sum([(n+1) * l**n * tensor(basis(n_max, n+1), basis(n_max, n+1)) 
                              for n in range(n_max - 1)])
     
 class PSA(LaserTwoMode):
     """Photon added then subtracted state"""
     def __init__(name, l, n_max):
-        super().__init__(name)
+        super().__init__(name, n_max)
         self.state = np.sum([(n+1)**2 * l**n * tensor(basis(n_max, n), basis(n_max, n)) 
                              for n in range(n_max)])
 
 class PAS(LaserTwoMode):
-        """Photon subtracted then added state"""
-        state = np.sum([(n+1)**2 * l**n * tensor(basis(n_max, n + 1), basis(n_max, n + 1)) \
-                        for n in rrange(n_max - 1)])
-        return state.unit()
+    """Photon subtracted then added state"""
+    def __init__(name, l, n_max):
+        super().__init(name, n_max)
+        self.state = np.sum([(n+1)**2 * l**n * tensor(basis(n_max, n + 1), basis(n_max, n + 1)) 
+                             for n in rrange(n_max - 1)])
     
 
 class PCS(LaserTwoMode):
@@ -136,7 +172,7 @@ class PCS(LaserTwoMode):
         define the superposition factor
     """
     def __init__(name, l, n_max, rt):
-        super().__init__(name)
+        super().__init__(name, n_max)
         self.state = self.__create_state(l, n_max, rt)
 
             
