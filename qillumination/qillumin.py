@@ -5,36 +5,35 @@
 
 """ Quantum Illumination """
 
+import numpy as np
+from qutip import *
+from src.laser2mdoe import *
+
 __author__ = 'Longfei Fan'
 
 
-import numpy as np
-from qutip import *
-
-from laser2 import *
-
-
-class QuIllumin(object):
+class QuIllumination(object):
     """
     Automatically numerical quantum illumination experiment
     """
     
-    def __init__(n_max):
+    def __init__(self, n_max):
         """
         Initialize the QuIllumin object.
         Set the maximum photon number used for numerical simulation
         """
-        self,n_max # Fock numbers are in [0, n_max - 1]
-        self.lasers = {} # lasers used for experiment
-        self.thermal_0 = None # thermal state where an object may be embedded in
+        self.n_max = n_max      # Fock numbers are in [0, n_max - 1]
+        self.lasers = {}        # lasers used for experiment
+        self.thermal_0 = None   # thermal state where an object may be embedded in
         self.thermal_1 = None
-        self.rfl = None # reflectance of the beam splitter
-        
-    
-    def create_laser(self, name, l, rt=False):
+        self.rfl = None         # reflectance of the beam splitter
+
+    def create_laser(self, name, l, rs=False):
         """
         Setup the entangled laser source for detection
         """
+        laser = None
+
         if name == 'TMSS':
             laser = TMSS(l, self.n_max)
         elif name == 'PS':
@@ -46,10 +45,11 @@ class QuIllumin(object):
         elif name == 'PAS':
             laser = PAS(l, self.n_max)
         elif name == "PCS":
-            laser = PCS(l, self.n_max, rt)
-    
-    
-    def setup_expriment(self, names, ls, nth, rfl, rt=False):
+            laser = PCS(l, self.n_max, rs)
+
+        return laser
+
+    def setup_experiment(self, names, ls, nth, rfl, rt=False):
         """
         Setup the two mode entangled laser, the thermal noise state, 
         and the reflectance of the beam splitter
@@ -63,16 +63,14 @@ class QuIllumin(object):
         self.thermal_0 = thermal_dm(self.n_max, nth)
         self.thermal_1 = thermal_dm(self.n_max, nth / (1 - rfl))
         self.rfl = rfl
-        
-    
+
     def rho_0(self, input_laser):
         """
         Output state rho 0 if an object is absent
         """
         rho_AB = ket2dm(input_laser)
         return tensor(rho_AB.ptrace(0), self.thermal_0) # rho_A (index 0) is kept here.
-    
-    
+
     def rho_1(self, input_laser):
         """
         Output state rho 1 if an object is present
@@ -83,19 +81,16 @@ class QuIllumin(object):
 
         # state A unchanged, tm_mixing acted on state B and thermal
         xi = np.arccos(np.sqrt(kappa))
-        op = tensor(qeye(N), self__tm_mix(xi))
+        op = tensor(qeye(N), self.__tm_mix(xi))
 
         rho_1 = op * rho_ABC * op.dag()
         return rho_1.ptrace([0, 1])  # keep A and B (index 0, 1)
-        
-    
+
     def run_experiment(self):
         """
         Run the experiment according to the parameters setup
         """
         pass
-    
-    
 
     def Helstrom(self, pi_0, rho_0, pi_1, rho_1, M=1):
         """ Calculate Helstrom error probability
@@ -113,8 +108,6 @@ class QuIllumin(object):
             pass # TODO
         return 0.5 * (1 - gamma.norm())
 
-    
-
     def Chernoff(self, rho_0, rho_1, approx=False):
         """ Approximated Q for QCB
             Actually the trace of sqrt(rho_1) * sqrt(rho_2)
@@ -125,23 +118,20 @@ class QuIllumin(object):
         else:
             # TODO give the optimal QCB by varying value of s
             pass
-        
 
-    def upper_bound(self, QCB, M):
+    @staticmethod
+    def upper_bound(QCB, M):
         """ Upper bound (Quantum Chernoff bound) of the error probability
             using s = 1/2
         """
         return 0.5 * QCB ** M
 
-
-    def lower_bound(self, tr, M):
+    @staticmethod
+    def lower_bound(tr, M):
         """ Lower bound of the error probability
         """
         return (1 - np.sqrt(1 - tr ** (2 * M))) / 2
-    
-    
-    
-    
+
     def __tm_sqz(self, xi):
         """
         Two mode mixing operator in the form of matrix with Fock basis
@@ -158,9 +148,8 @@ class QuIllumin(object):
         a = destroy(self.n_max)
         tms = - np.conj(xi) * tensor(a, a) + xi * tensor(a.dag(), a.dag())
         return tms.expm
-    
-    
-    def __tm_mix(self, xi)
+
+    def __tm_mix(self, xi):
         """
         Two-mode mixing operator (Beam splitter)
         
