@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3028c407-90cc-4625-ba96-f857038a42bc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumination/.cache/v/cache/lastfailed" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumination/qi_prototype.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/BS.png" afterPath="$PROJECT_DIR$/reference/beam_splitter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/quantum_illumination.iml" afterPath="$PROJECT_DIR$/.idea/quantum_illumination.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumination/laser2mdoe.py" afterPath="$PROJECT_DIR$/qillumination/laser2mdoe.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumination/qillumin.py" afterPath="$PROJECT_DIR$/qillumination/qillumin.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="laser2mdoe.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="laser2mdoe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/qillumination/laser2mdoe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="181">
+              <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
               <folding>
                 <element signature="e#124#143#0" expanded="true" />
               </folding>
@@ -31,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qillumin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="qillumin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/qillumination/qillumin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="107" column="41" lean-forward="false" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+            <state relative-caret-position="306">
+              <caret line="69" column="11" lean-forward="true" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
               <folding>
                 <element signature="e#141#159#0" expanded="true" />
               </folding>
@@ -43,7 +41,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="QCB_N1e-1_copy.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/output/QCB_N1e-1_copy.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>dm</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,14 +70,15 @@
         <option value="/code.py" />
         <option value="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" />
         <option value="$PROJECT_DIR$/qillumination/qillumin.py" />
+        <option value="$PROJECT_DIR$/qillumination/laser2mdoe.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2056" />
-    <option name="y" value="201" />
-    <option name="width" value="1392" />
-    <option name="height" value="999" />
+    <option name="x" value="1423" />
+    <option name="y" value="-6" />
+    <option name="width" value="1223" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -84,7 +95,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -95,26 +105,12 @@
             <path>
               <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
               <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="ipynbs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
               <item name="output" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
               <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
               <item name="qillumination" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="reference" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -136,11 +132,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -210,34 +207,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 46m 43s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 28m 52s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 46m 58s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 41m 28s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 47m 11s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 41m 58s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 56m 25s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 43m 00s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 57m 31s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 44m 23s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 58m 46s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 44m 51s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 03h 59m 34s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 45m 05s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 04h 08m 19s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 48m 31s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py - 2017.09.14 at 04h 08m 37s.xml">
-      <configuration name="py.test in laser2mdoe.py" configurationId="tests" />
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 48m 38s.xml">
+      <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 04h 23m 51s.xml">
+    <history-entry file="py_test_in_laser2mdoe_py_(1) - 2017.09.14 at 16h 50m 55s.xml">
       <configuration name="py.test in laser2mdoe.py (1)" configurationId="tests" />
     </history-entry>
   </component>
@@ -251,26 +248,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2056" y="201" width="1922" height="1201" extended-state="6" />
-    <editor active="true" />
+    <frame x="1423" y="-6" width="1223" height="1030" extended-state="6" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19787408" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20109689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299817" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19850586" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34164858" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299817" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -311,78 +307,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/quillumin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="16" column="59" lean-forward="true" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3258">
-          <caret line="181" column="26" lean-forward="true" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
-    <entry file="file://$PROJECT_DIR$/src/QI_with_Non-Gaussian_P-Err_vs_M_done.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/N_1e0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/P_Err_vs_Average_Photon_Number.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/P_Err_vs_Average_Photon_Number_copy.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3906">
-          <caret line="218" column="76" lean-forward="false" selection-start-line="218" selection-start-column="76" selection-end-line="218" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
-    <entry file="file://$PROJECT_DIR$/ipynbs/Test_Suites.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/QCB_N1e-1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/qillumination/laser2mdoe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -393,12 +317,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumination/qi_prototype.py">
+    <entry file="file://$PROJECT_DIR$/qillumination/qillumin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2916">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1890">
+          <caret line="107" column="41" lean-forward="false" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+          <folding>
+            <element signature="e#141#159#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py" />
+    <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
+    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py" />
+    <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
+    <entry file="file://$PROJECT_DIR$/src/QI_with_Non-Gaussian_P-Err_vs_M_done.ipynb" />
+    <entry file="file://$PROJECT_DIR$/src/P_Err_vs_Average_Photon_Number.ipynb" />
+    <entry file="file://$PROJECT_DIR$/src/P_Err_vs_Average_Photon_Number_copy.ipynb" />
+    <entry file="file://$PROJECT_DIR$/src/laser2mdoe.py" />
+    <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
+    <entry file="file://$PROJECT_DIR$/ipynbs/Test_Suites.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumination/qi_prototype.py" />
+    <entry file="file://$PROJECT_DIR$/output/N_1e-1_S_A.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output/QCB_N1e-1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output/N_1e-1_AS_SA.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output/N_1e-1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output/N_1e1.png">
@@ -406,12 +369,32 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/output/N_1e0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output/QCB_N1e-1_copy.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/qillumination/qillumin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="107" column="41" lean-forward="false" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+        <state relative-caret-position="306">
+          <caret line="69" column="11" lean-forward="true" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
           <folding>
             <element signature="e#141#159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumination/laser2mdoe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+          <folding>
+            <element signature="e#124#143#0" expanded="true" />
           </folding>
         </state>
       </provider>

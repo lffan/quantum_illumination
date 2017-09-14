@@ -119,14 +119,12 @@ class QuIllumination(object):
             # TODO: give the optimal QCB by varying value of s
             pass
 
-    @staticmethod
     def upper_bound(QCB, M):
         """ Upper bound (Quantum Chernoff bound) of the error probability
             using s = 1/2
         """
         return 0.5 * QCB ** M
 
-    @staticmethod
     def lower_bound(tr, M):
         """ Lower bound of the error probability
         """

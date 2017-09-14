@@ -10,6 +10,46 @@ import numpy as np
 __author__ = 'Longfei Fan'
 
 
+def tm_sqz(s, n_max):
+    """
+    Two mode mixing operator in the form of matrix with Fock basis
+
+    Parameters
+    ----------
+    s: float (TODO: a complex number??)
+        The squeezed parameter
+    n_max: positive integer
+        Photon numbers can be in [0, n_max - 1]
+
+    Return
+    ------
+        a new qubit.Qobj()
+    """
+    a = destroy(n_max)
+    tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
+    return tms.expm()
+
+
+def tm_mix(s, n_max):
+    """
+    Two-mode mixing operator (Beam splitter)
+
+    Parameters
+    ----------
+    s: float (TODO: a complex number??)
+        The mixing parameter
+    n_max: positive interger
+        Photon numbers can be in [0, n_max - 1]
+
+    Return
+    ------
+        a new qubit.Qobj()
+    """
+    a = destroy(n_max)
+    tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
+    return tmm.expm()
+
+
 class LaserTwoMode(object):
     """A class for two-mode lasers"""
 
@@ -33,40 +73,6 @@ class LaserTwoMode(object):
             self.state = None
         else:
             raise ValueError("N must be a positive integer.")
-
-    def __tm_sqz(self, s):
-        """
-        Two mode mixing operator in the form of matrix with Fock basis
-
-        Parameters
-        ----------
-        s: float (TODO: a complex number??)
-            The squeezed parameter
-
-        Return
-        ------
-            qubit.Qobj()
-        """
-        a = destroy(self.n_max)
-        tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
-        return tms.expm()
-
-    def __tm_mix(self, s):
-        """
-        Two-mode mixing operator (Beam splitter)
-
-        Parameters
-        ----------
-        s: float (TODO: a complex number??)
-            The mixing parameter
-
-        Return
-        ------
-        qubit.Qobj()
-        """
-        a = destroy(self.n_max)
-        tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
-        return tmm.expm()
 
 
 class TMSS(LaserTwoMode):
@@ -221,8 +227,19 @@ def test_run():
         name = item.state_name
         state = item.state
         print("State: {}".format(name))
-        print("<n>: {}".format(expect(num(item.n_max), state.ptrace(1))))
-        print("Entropy: {}\n".format(entropy_vn(state.ptrace(1))))
+        print("Mean n: {}".format(expect(num(item.n_max), state.ptrace(1))))
+        print("VN entropy: {}\n".format(entropy_vn(state.ptrace(1))))
+
+    input1 = ket2dm(tensor(basis(2, 0), basis(2, 1)))
+    tm_mix_op = tm_mix(0.1, 2)
+    output1 = tm_mix_op * input1 * tm_mix_op.dag()
+    print(input1)
+    print(output1)
+
+    input2 = ket2dm(tensor(basis(n_max, 0), basis(n_max, 0)))
+    tm_sqz_op = tm_sqz(0.1, n_max)
+    # output2 = tm_sqz_op * input2 * tm_sqz_op.dag()
+    # print("VN entropy: {}".format(entropy_vn(output2.ptrace(1))))
 
 
 if __name__ == "__main__":
