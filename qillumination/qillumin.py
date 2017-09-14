@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # Created on 2017-07-24
 # Last Modified on 2017-07-24
-# Latest Modified on 2017-07-24
+# Latest Modified on 2017-09-14
 
 """ Quantum Illumination """
 
 import numpy as np
 from qutip import *
-from src.laser2mdoe import *
+from laser2mdoe import *
 
 __author__ = 'Longfei Fan'
 
@@ -105,7 +105,7 @@ class QuIllumination(object):
         if M == 1:
             gamma = pi_1 * rho_1 - pi_0 * rho_0
         else:
-            pass # TODO
+            pass # TODO: for those M != 1
         return 0.5 * (1 - gamma.norm())
 
     def Chernoff(self, rho_0, rho_1, approx=False):
@@ -116,7 +116,7 @@ class QuIllumination(object):
             # s = 0.5
             return (rho_0.sqrtm() * rho_1.sqrtm()).tr().real
         else:
-            # TODO give the optimal QCB by varying value of s
+            # TODO: give the optimal QCB by varying value of s
             pass
 
     @staticmethod
