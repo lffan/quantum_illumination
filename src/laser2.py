@@ -188,4 +188,8 @@ class PCS(LaserTwoMode):
         state4 = np.sum([l**n * (n+1) * tensor(basis(n_max, n + 1), basis(n_max, n + 1)) \
                         for n in nlist[:-1]])
         self.state = ta * tb * state1 + ta * rb * state2 + \
+<<<<<<< HEAD
                 ra * tb * state3 + ra * rb * state4
+=======
+                ra * tb * state3 + ra * rb * state4
+>>>>>>> dev
