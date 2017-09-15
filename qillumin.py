@@ -6,8 +6,8 @@
 """ Quantum Illumination """
 
 import numpy as np
-from qutip import *
-from laser2mdoe import *
+import qutip as qu
+import laser2mdoe as l2m
 
 __author__ = 'Longfei Fan'
 
@@ -35,17 +35,17 @@ class QuIllumination(object):
         laser = None
 
         if name == 'TMSS':
-            laser = TMSS(l, self.n_max)
+            laser = l2m.TMSS(l, self.n_max)
         elif name == 'PS':
-            laser = PS(l, self.n_max)
+            laser = l2m.PS(l, self.n_max)
         elif name == 'PA':
-            laser = PA(l, self.n_max)
+            laser = l2m.PA(l, self.n_max)
         elif name == 'PSA':
-            laser = PSA(l, self.n_max)
+            laser = l2m.PSA(l, self.n_max)
         elif name == 'PAS':
-            laser = PAS(l, self.n_max)
+            laser = l2m.PAS(l, self.n_max)
         elif name == "PCS":
-            laser = PCS(l, self.n_max, rs)
+            laser = l2m.PCS(l, self.n_max, rs)
 
         return laser
 
@@ -60,28 +60,28 @@ class QuIllumination(object):
                     self.lasers[name] = [self.create_laser(name, l, rt)]
                 else:
                     self.lasers[name].append(self.create_laser(name, l, rt))
-        self.thermal_0 = thermal_dm(self.n_max, nth)
-        self.thermal_1 = thermal_dm(self.n_max, nth / (1 - rfl))
+        self.thermal_0 = qu.thermal_dm(self.n_max, nth)
+        self.thermal_1 = qu.thermal_dm(self.n_max, nth / (1 - rfl))
         self.rfl = rfl
 
     def rho_0(self, input_laser):
         """
         Output state rho 0 if an object is absent
         """
-        rho_AB = ket2dm(input_laser)
-        return tensor(rho_AB.ptrace(0), self.thermal_0) # rho_A (index 0) is kept here.
+        rho_AB = qu.ket2dm(input_laser)
+        return qu.tensor(rho_AB.ptrace(0), self.thermal_0)  # rho_A (index 0) is kept here.
 
     def rho_1(self, input_laser):
         """
         Output state rho 1 if an object is present
         """
-        rho_AB = ket2dm(input_laser)
+        rho_AB = qu.ket2dm(input_laser)
 
-        rho_ABC = tensor(rho_AB, self.thermal_1)
+        rho_ABC = qu.tensor(rho_AB, self.thermal_1)
 
         # state A unchanged, tm_mixing acted on state B and thermal
         xi = np.arccos(np.sqrt(kappa))
-        op = tensor(qeye(N), self.__tm_mix(xi))
+        op = qu.tensor(qeye(N), self.__tm_mix(xi))
 
         rho_1 = op * rho_ABC * op.dag()
         return rho_1.ptrace([0, 1])  # keep A and B (index 0, 1)
@@ -129,37 +129,3 @@ class QuIllumination(object):
         """ Lower bound of the error probability
         """
         return (1 - np.sqrt(1 - tr ** (2 * M))) / 2
-
-    def __tm_sqz(self, xi):
-        """
-        Two mode mixing operator in the form of matrix with Fock basis
-        
-        Parameters
-        ----------
-        s: a complex number
-            The squeezed parameter
-        
-        Return
-        ------
-        qubit.Qobj()
-        """
-        a = destroy(self.n_max)
-        tms = - np.conj(xi) * tensor(a, a) + xi * tensor(a.dag(), a.dag())
-        return tms.expm
-
-    def __tm_mix(self, xi):
-        """
-        Two-mode mixing operator (Beam splitter)
-        
-        Parameters
-        ----------
-        s: a complex number
-            The mixing parameter
-        
-        Return
-        ------
-        qubit.Qobj()
-        """
-        a = destroy(self.n_max)
-        tmm = xi * tensor(a.dag(), a) - np.conj(xi) * tensor(a, a.dag())
-        return tmm.expm() 

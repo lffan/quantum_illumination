@@ -4,7 +4,7 @@
 
 """ two-mode laser, TMSS and non-Gaussian states """
 
-from qutip import *
+import qutip as qu
 import numpy as np
 
 __author__ = 'Longfei Fan'
@@ -25,8 +25,8 @@ def tm_sqz(s, n_max):
     ------
         a new qubit.Qobj()
     """
-    a = destroy(n_max)
-    tms = - np.conj(s) * tensor(a, a) + s * tensor(a.dag(), a.dag())
+    a = qu.destroy(n_max)
+    tms = - np.conj(s) * qu.tensor(a, a) + s * qu.tensor(a.dag(), a.dag())
     return tms.expm()
 
 
@@ -45,8 +45,8 @@ def tm_mix(s, n_max):
     ------
         a new qubit.Qobj()
     """
-    a = destroy(n_max)
-    tmm = s * tensor(a.dag(), a) - np.conj(s) * tensor(a, a.dag())
+    a = qu.destroy(n_max)
+    tmm = s * qu.tensor(a.dag(), a) - np.conj(s) * qu.tensor(a, a.dag())
     return tmm.expm()
 
 
@@ -96,7 +96,7 @@ class TMSS(LaserTwoMode):
     def __init__(self, l, n_max):
         super().__init__(n_max)
         self.state_name = "TMSS"
-        self.state = np.sum([l ** n * tensor(basis(n_max, n), basis(n_max, n))
+        self.state = np.sum([l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                              for n in np.arange(n_max)])
 
 
@@ -121,7 +121,7 @@ class PS(LaserTwoMode):
         """
         super().__init__(n_max)
         self.state_name = "PS"
-        self.state = np.sum([(n + 1) * l ** n * tensor(basis(n_max, n), basis(n_max, n))
+        self.state = np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                              for n in np.arange(n_max)])
 
 
@@ -146,7 +146,7 @@ class PA(LaserTwoMode):
         """
         super().__init__(n_max)
         self.state_name = "PA"
-        self.state = np.sum([(n + 1) * l ** n * tensor(basis(n_max, n + 1), basis(n_max, n + 1))
+        self.state = np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                              for n in np.arange(n_max - 1)])
 
 
@@ -156,7 +156,7 @@ class PSA(LaserTwoMode):
     def __init__(self, l, n_max):
         super().__init__(n_max)
         self.state_name = "PSA"
-        self.state = np.sum([(n + 1) ** 2 * l ** n * tensor(basis(n_max, n), basis(n_max, n))
+        self.state = np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                              for n in np.arange(n_max)])
 
 
@@ -166,7 +166,7 @@ class PAS(LaserTwoMode):
     def __init__(self, l, n_max):
         super().__init__(n_max)
         self.state_name = "PAS"
-        self.state = np.sum([(n + 1) ** 2 * l ** n * tensor(basis(n_max, n + 1), basis(n_max, n + 1))
+        self.state = np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                              for n in np.arange(n_max - 1)])
 
 
@@ -204,22 +204,22 @@ class PCS(LaserTwoMode):
         nums = np.arange(n_max)
 
         state1 = np.sum([l ** (n + 1) * (n + 1) *
-                         tensor(basis(n_max, n), basis(n_max, n)) for n in nums])
+                        qu.tensor(qu.basis(n_max, n),qu.basis(n_max, n)) for n in nums])
 
         state2 = np.sum([l ** (n + 1) * np.sqrt((n + 1) * (n + 2)) *
-                         tensor(basis(n_max, n), basis(n_max, n + 2)) for n in nums[:-2]])
+                        qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n + 2)) for n in nums[:-2]])
 
         state3 = np.sum([l ** (n + 1) * np.sqrt((n + 1) * (n + 2)) *
-                         tensor(basis(n_max, n + 2), basis(n_max, n)) for n in nums[:-2]])
+                        qu.tensor(qu.basis(n_max, n + 2), qu.basis(n_max, n)) for n in nums[:-2]])
 
         state4 = np.sum([l ** n * (n + 1) *
-                         tensor(basis(n_max, n + 1), basis(n_max, n + 1)) for n in nums[:-1]])
+                        qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1)) for n in nums[:-1]])
 
         self.state = ta * tb * state1 + ta * rb * state2 + ra * tb * state3 + ra * rb * state4
 
 
 def test_run():
-    n_max = 64
+    n_max = 20
     lmd = 0.1
     state_all = [TMSS(lmd, n_max), PS(lmd, n_max), PA(lmd, n_max),
                  PSA(lmd, n_max), PAS(lmd, n_max), PCS(lmd, n_max, (0.7, 0.7))]
@@ -227,19 +227,19 @@ def test_run():
         name = item.state_name
         state = item.state
         print("State: {}".format(name))
-        print("Mean n: {}".format(expect(num(item.n_max), state.ptrace(1))))
-        print("VN entropy: {}\n".format(entropy_vn(state.ptrace(1))))
+        print("Mean n: {}".format(qu.expect(qu.num(item.n_max), state.ptrace(1))))
+        print("VN entropy: {}\n".format(qu.entropy_vn(state.ptrace(1))))
 
-    input1 = ket2dm(tensor(basis(2, 0), basis(2, 1)))
+    input1 = qu.ket2dm(qu.tensor(qu.basis(2, 0), qu.basis(2, 1)))
     tm_mix_op = tm_mix(0.1, 2)
     output1 = tm_mix_op * input1 * tm_mix_op.dag()
     print(input1)
     print(output1)
 
-    input2 = ket2dm(tensor(basis(n_max, 0), basis(n_max, 0)))
+    input2 = qu.ket2dm(qu.tensor(qu.basis(n_max, 0), qu.basis(n_max, 0)))
     tm_sqz_op = tm_sqz(0.1, n_max)
-    # output2 = tm_sqz_op * input2 * tm_sqz_op.dag()
-    # print("VN entropy: {}".format(entropy_vn(output2.ptrace(1))))
+    output2 = tm_sqz_op * input2 * tm_sqz_op.dag()
+    print("\nVN entropy: {}".format(qu.entropy_vn(output2.ptrace(1))))
 
 
 if __name__ == "__main__":
