@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3028c407-90cc-4625-ba96-f857038a42bc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/laser2mdoe.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/quantum_illumination.iml" afterPath="$PROJECT_DIR$/.idea/quantum_illumination.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/laser2mode.py" afterPath="$PROJECT_DIR$/qillumi/laser2mode.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qcb_pcs_opt.py" afterPath="$PROJECT_DIR$/qillumi/qcb_pcs_opt.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qillumin.py" afterPath="$PROJECT_DIR$/qillumi/qillumin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumin.py" afterPath="$PROJECT_DIR$/qillumin.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,32 +17,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Test_Suites.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ipynbs/Test_Suites.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ipynbs/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -69,6 +51,7 @@
         <option value="$PROJECT_DIR$/src/__init__.py" />
         <option value="$PROJECT_DIR$/ipynbs/Test_Suites.ipynb" />
         <option value="$PROJECT_DIR$/ipynbs/test.py" />
+        <option value="$PROJECT_DIR$/test/example.ipynb" />
       </list>
     </option>
   </component>
@@ -103,27 +86,6 @@
               <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
               <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="ipynbs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="ipynbs" type="462c0819:PsiDirectoryNode" />
-              <item name=".ipynb_checkpoints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="reference" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -153,6 +115,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quillumi" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ipynbs" />
     </key>
@@ -212,7 +175,7 @@
       <module name="quantum_illumination" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/laser2mode.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/qillumi/laser2mode.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -306,12 +269,12 @@
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2561366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2035225" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2035225" sideWeight="0.50426894" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2035225" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2035225" sideWeight="0.49573106" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -398,9 +361,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laser2mode.py" />
+    <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py" />
     <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
-    <entry file="file://$PROJECT_DIR$/laser2mode.py" />
+    <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py" />
     <entry file="file://$PROJECT_DIR$/src/quillumin.py" />
     <entry file="file://$PROJECT_DIR$/src/QI_with_Non-Gaussian_P-Err_vs_M_done.ipynb" />
     <entry file="file://$PROJECT_DIR$/src/P_Err_vs_Average_Photon_Number.ipynb" />
@@ -458,7 +421,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qcb_pcs_opt.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/qcb_pcs_opt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -466,7 +429,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumin.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/qillumin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
@@ -490,23 +453,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laser2mode.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#124#142#0" expanded="true" />
+            <element signature="e#124#142#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumin.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/qillumin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding>
-            <element signature="e#141#159#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -543,9 +504,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ipynbs/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/example.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="1" />
         </state>
       </provider>
     </entry>
