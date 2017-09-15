@@ -7,7 +7,7 @@
 
 import numpy as np
 import qutip as qu
-import laser2mdoe as l2m
+import laser2mode as l2m
 
 __author__ = 'Longfei Fan'
 

@@ -221,6 +221,7 @@ class PCS(LaserTwoMode):
 def test_run():
     n_max = 20
     lmd = 0.1
+    # Test creating states
     state_all = [TMSS(lmd, n_max), PS(lmd, n_max), PA(lmd, n_max),
                  PSA(lmd, n_max), PAS(lmd, n_max), PCS(lmd, n_max, (0.7, 0.7))]
     for item in state_all:
@@ -230,12 +231,14 @@ def test_run():
         print("Mean n: {}".format(qu.expect(qu.num(item.n_max), state.ptrace(1))))
         print("VN entropy: {}\n".format(qu.entropy_vn(state.ptrace(1))))
 
+    # Test two-mode mixing
     input1 = qu.ket2dm(qu.tensor(qu.basis(2, 0), qu.basis(2, 1)))
     tm_mix_op = tm_mix(0.1, 2)
     output1 = tm_mix_op * input1 * tm_mix_op.dag()
     print(input1)
     print(output1)
 
+    # Test two-mode squeezing
     input2 = qu.ket2dm(qu.tensor(qu.basis(n_max, 0), qu.basis(n_max, 0)))
     tm_sqz_op = tm_sqz(0.1, n_max)
     output2 = tm_sqz_op * input2 * tm_sqz_op.dag()
