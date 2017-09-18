@@ -7,7 +7,9 @@
 *.dat
 *.npz
 *.csv
-test.*
+*.out
+test*
+dev*
 .ipynb_checkpoints
 __pycache__
 slides

@@ -7,51 +7,14 @@
 
 import numpy as np
 import qutip as qu
+import pandas as pd
+from scipy.sparse import spdiags
+from scipy.optimize import minimize
+from qutip.sparse import sp_eigs
 
 from qillumi import laser2mode as l2m
 
 __author__ = 'Longfei Fan'
-
-
-def qu_helstrom(rho0, rho1, p0=0.5, M=1):
-    """ Calculate Helstrom error probability
-        which is defined as
-
-            P_e = 0.5 (1 - ||p1 * rho1 - p0 * rho0||)
-
-        pi_0, rho_0: state 1 and its a priori probability pi_0
-        pi_1, rho_1: state 2 and its a priori probability pi_1
-        M: number of copies
-    """
-    if M == 1:
-        return 0.5 * (1 - ((1 - p0) * rho1 - p0 * rho0).norm())
-    else:
-        pass  # TODO: for those M != 1
-
-
-def qu_chernoff(rho0, rho1, approx=False):
-    """ Approximated Q for QCB
-        Actually the trace of sqrt(rho_1) * sqrt(rho_2)
-    """
-    if approx:
-        # s = 0.5
-        return (rho0.sqrtm() * rho1.sqrtm()).tr().real
-    else:
-        # TODO: give the optimal QCB by varying value of s
-        pass
-
-
-def upper_bound(QCB, M):
-    """ Upper bound (Quantum Chernoff bound) of the error probability
-        using s = 1/2
-    """
-    return 0.5 * QCB ** M
-
-
-def lower_bound(tr, M):
-    """ Lower bound of the error probability
-    """
-    return (1 - np.sqrt(1 - tr ** (2 * M))) / 2
 
 
 class QIExpr(object):
@@ -67,8 +30,11 @@ class QIExpr(object):
         self.n_max = n_max          # Fock numbers are in [0, n_max - 1]
         self.laser = None           # laser used for experiment
         self.reflectance = None     # reflectance of the beam splitter
+        self.nth = None             # average photon number of the thermal state
         self.thermal_0 = None       # thermal state where an object may be embedded in
         self.thermal_1 = None       # thermal state adjusted by the reflection factor
+        self.qhb = None
+        self.qcb = [0.5, 0.5]
 
     def __create_laser(self, name, l, rs=False):
         """
@@ -126,31 +92,9 @@ class QIExpr(object):
         no return, alternate self.thermal_0 and self.thermal_1 inplace
         """
         self.reflectance = reflectance
+        self.nth = nth
         self.thermal_0 = qu.thermal_dm(self.n_max, nth)
         self.thermal_1 = qu.thermal_dm(self.n_max, nth / (1 - self.reflectance))
-
-    # def set_expr(self, state_name, l, reflectance, nth, rs=False):
-    #     """
-    #     Setup the experiment
-    #
-    #     """
-    #     self.set_input_laser(state_name, l, rs)
-    #     self.set_environment(reflectance, nth)
-
-    # def setup_experiment(self, names, ls, nth, rfl, rt=False):
-    #     """
-    #     Setup the two mode entangled laser, the thermal noise state,
-    #     and the reflectance of the beam splitter
-    #     """
-    #     for name in names:
-    #         for l in ls:
-    #             if name not in self.lasers:
-    #                 self.lasers[name] = [self.create_laser(name, l, rt)]
-    #             else:
-    #                 self.lasers[name].append(self.create_laser(name, l, rt))
-    #     self.thermal_0 = qu.thermal_dm(self.n_max, nth)
-    #     self.thermal_1 = qu.thermal_dm(self.n_max, nth / (1 - rfl))
-    #     self.rfl = rfl
 
     def __evolve_rho0(self):
         """
@@ -179,33 +123,142 @@ class QIExpr(object):
         """
         rho0 = self.__evolve_rho0()
         rho1 = self.__evolve_rho1()
-        qhb = qu_helstrom(rho0, rho1)
-        qcb = qu_chernoff(rho0, rho1, approx=True)
-        qcb1 = upper_bound(qcb, M=1)
-        return qhb, qcb, qcb1
+        self.qhb = qu_helstrom(rho0, rho1)
+        qcb = qu_chernoff(rho0, rho1, approx=False)
+        self.qcb[0] = qcb[0]
+        self.qcb[1] = upper_bound(qcb[1], M=1)
+        # print(self.qhb, self.qcb)
+
+    def get_attr(self):
+        """
+        Return some useful information
+        """
+        return {'State': self.laser.state_name, 'Aver N': self.laser.numeric_num,
+                'Nth': self.nth, 'R': self.reflectance,
+                'Helstrom': self.qhb, 'Chernoff': self.qcb[1], 'S_opt': np.round(self.qcb[0], 6)}
+
+
+def power(qstate, power, sparse=False, tol=0, maxiter=100000):
+    """power of a quantum operator.
+    Operator must be square.
+    Parameters
+    ----------
+    qstate: qutip.Qobj()
+        quantum state
+    power: float
+        power
+    sparse : bool
+        Use sparse eigenvalue/vector solver.
+    tol : float
+        Tolerance used by sparse solver (0 = machine precision).
+    maxiter : int
+        Maximum number of iterations used by sparse solver.
+    Returns
+    -------
+    oper : qobj
+        Matrix square root of operator.
+    Raises
+    ------
+    TypeError
+        Quantum object is not square.
+    Notes
+    -----
+    The sparse eigensolver is much slower than the dense version.
+    Use sparse only if memory requirements demand it.
+    """
+    if qstate.dims[0][0] == qstate.dims[1][0]:
+        evals, evecs = sp_eigs(qstate.data, qstate.isherm, sparse=sparse,
+                               tol=tol, maxiter=maxiter)
+        numevals = len(evals)
+        dV = spdiags(np.power(evals, power, dtype=complex), 0,
+                     numevals, numevals, format='csr')
+        if qstate.isherm:
+            spDv = dV.dot(evecs.T.conj().T)
+        else:
+            spDv = dV.dot(np.linalg.inv(evecs.T))
+
+        out = qu.Qobj(evecs.T.dot(spDv), dims=qstate.dims)
+        return out.tidyup() if qu.settings.auto_tidyup else out
+
+    else:
+        raise TypeError('Invalid operand for matrix square root')
+
+
+def qu_helstrom(rho0, rho1, p0=0.5, M=1):
+    """ Calculate Helstrom error probability
+        which is defined as
+
+            P_e = 0.5 (1 - ||p1 * rho1 - p0 * rho0||)
+
+        pi_0, rho_0: state 1 and its a priori probability pi_0
+        pi_1, rho_1: state 2 and its a priori probability pi_1
+        M: number of copies
+    """
+    if M == 1:
+        return 0.5 * (1 - ((1 - p0) * rho1 - p0 * rho0).norm())
+    else:
+        pass  # TODO: for those M != 1
+
+
+def qcb_s(s, rho0, rho1):
+    """
+    Tr[rho ** s - rho ** (1 - s)]
+    """
+    return (power(rho0, s) * power(rho1, 1 - s)).tr().real
+
+
+def qu_chernoff(rho0, rho1, approx=False):
+    """ Approximated Q for QCB
+        Actually the trace of sqrt(rho_1) * sqrt(rho_2)
+    """
+    if approx:
+        # s = 0.5
+        return 0.5, (rho0.sqrtm() * rho1.sqrtm()).tr().real
+    else:
+        # TODO: give the optimal QCB by varying value of s
+        res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
+                       method='Nelder-Mead', options={'disp': False})
+        s = res.x[0]
+        if 0 <= s <= 1:
+            return s, qcb_s(s, rho0, rho1)
+        else:
+            raise ValueError("s should be within [0, 1].")
+
+
+def upper_bound(QCB, M):
+    """ Upper bound (Quantum Chernoff bound) of the error probability
+        using s = 1/2
+    """
+    return 0.5 * QCB ** M
+
+
+def lower_bound(tr, M):
+    """ Lower bound of the error probability
+    """
+    return (1 - np.sqrt(1 - tr ** (2 * M))) / 2
 
 
 def run(n_max, nth, ns, rflct, rs):
-    lmd = np.sqrt(ns / (1 + ns))
 
+    lmd = np.sqrt(ns / (1 + ns))
     expr = QIExpr(n_max)
     expr.set_environment(rflct, nth)
 
-    print("\nHelstrom Bounds")
-    for name in ('TMSS', 'PS', 'PA', 'PSA', 'PAS'):
-        expr.set_input_laser(name, lmd)
-        print("{} QHB: {}".format(name, expr.run_expr()[0]))
-        print("{} QCB: {}".format(name, expr.run_expr()[2]))
-    expr.set_input_laser('PCS', lmd, rs)
-    print("{} QHB: {}".format('PCS', expr.run_expr()[0]))
-    print("{} QCB: {}".format('PCS', expr.run_expr()[2]))
+    # print("\nHelstrom Bounds\n")
+    for name in ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS'):
+        if name != 'PCS':
+            expr.set_input_laser(name, lmd)
+        else:
+            expr.set_input_laser('PCS', lmd, rs)
+        expr.run_expr()
+        print(expr.get_attr())
 
 
-def test_run():
-    run(11, 0.1, 0.01, 0.01, (0.7071, 0.7071))
-    run(16, 1.0, 0.01, 0.01, (0.7071, 0.7071))
-    run(21, 10.0, 0.01, 0.01, (0.7071, 0.7071))
+def expr_one():
+    run(10, 0.1, 0.01, 0.01, (0.4, 0.4))
+    run(15, 1.0, 0.01, 0.01, (0.4, 0.4))
+    run(20, 10.0, 0.01, 0.01, (0.4, 0.4))
 
 
 if __name__ == "__main__":
-    test_run()
+    expr_one()
