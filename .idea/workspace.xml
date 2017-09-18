@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3028c407-90cc-4625-ba96-f857038a42bc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumi/.cache/v/cache/lastfailed" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumi/qcb_pcs_opt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Backup_QI_with_Non-Gaussian_P-Err_vs_M-Old.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Backup_QI_with_Non-Gaussian_P-Err_vs_M.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/P_Err_vs_Average_Photon_Number.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/P_Err_vs_Average_Photon_Number_copy.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Properties_of_Non-Gaussian_States_Protected.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/QI_Optimal_QCB_Ploting.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/QI_Optimal_QCB_Searching_todo.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/QI_with_Non-Gaussian_P-Err_vs_M_done.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/QI_with_Non-Gaussian_Prototype.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/QCB_N1e-1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/QCB_N1e-1_copy.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ipynbs/Quntuan_Illumination.nb" afterPath="$PROJECT_DIR$/ref/Note_Non-Gaussian_Aver_Photon_Numbers.nb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/Note_Continuous_Variable_Quantum_Information.ipynb" afterPath="$PROJECT_DIR$/ref/Note_Continuous_Variable_Quantum_Information.ipynb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/Note_Fuchs_Distinguishability_and_Acessible_Information.ipynb" afterPath="$PROJECT_DIR$/ref/Note_Fuchs_Distinguishability_and_Acessible_Information.ipynb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/Note_Fuchs_Distinguishability_of_Quantum_States.ipynb" afterPath="$PROJECT_DIR$/ref/Note_Fuchs_Distinguishability_of_Quantum_States.ipynb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/aver_photon_num.png" afterPath="$PROJECT_DIR$/ref/aver_photon_num.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reference/beam_splitter.png" afterPath="$PROJECT_DIR$/ref/beam_splitter.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/laser2mode.py" afterPath="$PROJECT_DIR$/qillumi/laser2mode.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +35,8 @@
       <file leaf-file-name="laser2mode.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="205" column="31" lean-forward="true" selection-start-line="205" selection-start-column="31" selection-end-line="205" selection-end-column="31" />
+            <state relative-caret-position="-269">
+              <caret line="214" column="11" lean-forward="true" selection-start-line="214" selection-start-column="11" selection-end-line="214" selection-end-column="11" />
               <folding>
                 <element signature="e#124#142#0" expanded="true" />
               </folding>
@@ -31,8 +47,8 @@
       <file leaf-file-name="qi_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/qillumi/qi_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="973">
-              <caret line="96" column="18" lean-forward="true" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
+            <state relative-caret-position="-1421">
+              <caret line="96" column="18" lean-forward="false" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
               <folding>
                 <element signature="e#141#159#0" expanded="true" />
               </folding>
@@ -43,8 +59,8 @@
       <file leaf-file-name="matrix_fraction_power.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/matrix_fraction_power.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="180">
+              <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
               <folding>
                 <element signature="e#111#129#0" expanded="true" />
               </folding>
@@ -55,8 +71,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+            <state relative-caret-position="144">
+              <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -131,6 +147,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="quantum_illumination" type="cbb8eebc:String" user="quantum_illumination" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="quantum_illumination" type="cbb8eebc:String" user="quantum_illumination" />
+              <item name="qillumination" type="cbb8eebc:String" user="qillumination" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,23 +188,12 @@
             <path>
               <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
               <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
-              <item name="reference" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="quantum_illumination" type="cbb8eebc:String" user="quantum_illumination" />
+              <item name="ref" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="quantum_illumination" type="cbb8eebc:String" user="quantum_illumination" />
-              <item name="qillumination" type="cbb8eebc:String" user="qillumination" />
+              <item name="quantum_illumination" type="b2602c69:ProjectViewProjectNode" />
+              <item name="quantum_illumination" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -187,6 +208,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ref" />
       <recent name="$PROJECT_DIR$/ipynbs" />
       <recent name="$PROJECT_DIR$/quillumi" />
       <recent name="$PROJECT_DIR$" />
@@ -354,18 +376,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="0" width="1922" height="1201" extended-state="6" />
+    <frame x="2369" y="69" width="1922" height="1201" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17449306" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17662753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20281996" sideWeight="0.5077678" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39215687" sideWeight="0.4922322" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286648" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24463119" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -375,6 +396,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299817" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -421,13 +443,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/qcb_pcs_opt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/qcb_pcs_opt.py" />
     <entry file="file://$PROJECT_DIR$/qillumi/qi_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3168">
@@ -583,38 +599,31 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="205" column="31" lean-forward="true" selection-start-line="205" selection-start-column="31" selection-end-line="205" selection-end-column="31" />
-          <folding>
-            <element signature="e#124#142#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/qcb_pcs_opt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/qcb_pcs_opt.py" />
     <entry file="file://$PROJECT_DIR$/qillumi/qi_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="973">
-          <caret line="96" column="18" lean-forward="true" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
+        <state relative-caret-position="-1421">
+          <caret line="96" column="18" lean-forward="false" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
           <folding>
             <element signature="e#141#159#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="214" column="11" lean-forward="true" selection-start-line="214" selection-start-column="11" selection-end-line="214" selection-end-column="11" />
+          <folding>
+            <element signature="e#124#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/matrix_fraction_power.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        <state relative-caret-position="180">
+          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
           <folding>
             <element signature="e#111#129#0" expanded="true" />
           </folding>
@@ -623,8 +632,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        <state relative-caret-position="144">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           <folding />
         </state>
       </provider>

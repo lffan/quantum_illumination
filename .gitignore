@@ -11,3 +11,4 @@ test.*
 .ipynb_checkpoints
 __pycache__
 slides
+.cache

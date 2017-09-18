@@ -199,7 +199,7 @@ class PCS(LaserTwoMode):
 
         Parameters
         ----------
-        rt: a list of int
+        rs: a list of int
             define the superposition factor
         """
         super().__init__(n_max)
