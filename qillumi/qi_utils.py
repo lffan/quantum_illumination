@@ -7,7 +7,6 @@
 
 import numpy as np
 import qutip as qu
-import pandas as pd
 from scipy.sparse import spdiags
 from scipy.optimize import minimize
 from qutip.sparse import sp_eigs
@@ -129,13 +128,15 @@ class QIExpr(object):
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)
 
-    def get_attr(self):
+    def get_attrs(self):
         """
         Return some useful information
         """
-        return {'State': self.laser.state_name, 'Aver N': self.laser.numeric_num,
-                'Nth': self.nth, 'R': self.reflectance,
-                'Helstrom': self.qhb, 'Chernoff': self.qcb[1], 'S_opt': np.round(self.qcb[0], 6)}
+        laser_attrs = self.laser.get_attrs()
+        expr_attrs = {'Nth': self.nth, 'R': self.reflectance,
+                      'Helstrom': self.qhb, 'Chernoff': self.qcb[1],
+                      'S_opt': np.round(self.qcb[0], 6)}
+        return {**laser_attrs, **expr_attrs}
 
 
 def power(qstate, power, sparse=False, tol=0, maxiter=100000):
@@ -251,13 +252,12 @@ def run(n_max, nth, ns, rflct, rs):
         else:
             expr.set_input_laser('PCS', lmd, rs)
         expr.run_expr()
-        print(expr.get_attr())
+        print(expr.get_attrs())
 
 
 def expr_one():
     run(10, 0.1, 0.01, 0.01, (0.4, 0.4))
     run(15, 1.0, 0.01, 0.01, (0.4, 0.4))
-    run(20, 10.0, 0.01, 0.01, (0.4, 0.4))
 
 
 if __name__ == "__main__":

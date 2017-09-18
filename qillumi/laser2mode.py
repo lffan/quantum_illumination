@@ -13,12 +13,14 @@ __author__ = 'Longfei Fan'
 class LaserTwoMode(object):
     """A class for two-mode lasers"""
 
-    def __init__(self, n_max):
+    def __init__(self, l, n_max):
         """
         To initialize a two-mode state.
 
         Parameters
         ----------
+        l: float
+            lambda factor defined in equations of states
         n_max: integer
             maximum photon number for calculation is n_max - 1
 
@@ -29,12 +31,18 @@ class LaserTwoMode(object):
         """
         if n_max > 0:
             self.n_max = n_max
+            self.lmd = l
             self.state_name = None
             self.state = None
-            self.numeric_num = None
+            self.num = None
             self.exact_num = None
+            self.entanglement = None
         else:
             raise ValueError("N must be a positive integer.")
+
+    def get_attrs(self):
+        return {'State': self.state_name, 'lambda': self.lmd,
+                'Aver_N': self.num, 'VN_Entropy': self.entanglement}
 
 
 class TMSS(LaserTwoMode):
@@ -56,13 +64,14 @@ class TMSS(LaserTwoMode):
     """
 
     def __init__(self, l, n_max):
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "TMSS"
         self.state = qu.Qobj(np.sum([l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                                      for n in np.arange(n_max)])).unit()
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = l ** 2 / (1 - l ** 2)
-        # print("TMSS aver n: {}, {}".format(self.numeric_num, self.exact_num))
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0)) * 2
+        self.exact_num = l ** 2 / (1 - l ** 2) * 2
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("TMSS aver n: {}, {}".format(self.num, self.exact_num))
 
 
 class PS(LaserTwoMode):
@@ -83,13 +92,14 @@ class PS(LaserTwoMode):
         qutip.Qobj()
             a qutip object, a photon subtracted state in bra form
         """
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "PS"
         self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                                      for n in np.arange(n_max)])).unit()
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = 2 * l ** 2 * (2 + l ** 2) / (1 - l ** 4)
-        # print("PS aver n: {}, {}".format(self.numeric_num, self.exact_num))
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("PS aver n: {}, {}".format(self.num, self.exact_num))
 
 
 class PA(LaserTwoMode):
@@ -110,39 +120,42 @@ class PA(LaserTwoMode):
         qutip.Qobj()
             a qutip object, a photon added state in bra form
         """
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "PA"
         self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                                      for n in np.arange(n_max - 1)])).unit()
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = (1 + 4 * l ** 2 + l ** 4) / (1 - l ** 4)
-        # print("PA aver n:{}, {}".format(self.numeric_num, self.exact_num))
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("PA aver n:{}, {}".format(self.num, self.exact_num))
 
 
 class PSA(LaserTwoMode):
     """Photon added then subtracted state"""
 
     def __init__(self, l, n_max):
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "PSA"
         self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                                      for n in np.arange(n_max)])).unit()
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = 2 * l**2 * (8 + 33 * l**2 + 18 * l**4 + l**6) / (1 + 10 * l**2 - 10 * l**6 + l**8)
-        # print("PSA aver n: {}, {}".format(self.numeric_num, self.exact_num))
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("PSA aver n: {}, {}".format(self.num, self.exact_num))
 
 
 class PAS(LaserTwoMode):
     """Photon subtracted then added state"""
 
     def __init__(self, l, n_max):
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "PAS"
         self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                                      for n in np.arange(n_max - 1)])).unit()
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = (1 + 26 * l**2 + 66 * l**4 + 26 * l**6 + l**8) / (1 + 10 * l**2 - 10 * l**6 - l**8)
-        # print("PAS aver n: {}, {}".format(self.numeric_num, self.exact_num))
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("PAS aver n: {}, {}".format(self.num, self.exact_num))
 
 
 class PCS(LaserTwoMode):
@@ -164,12 +177,22 @@ class PCS(LaserTwoMode):
         rs: a list of int
             define the superposition factor
         """
-        super().__init__(n_max)
+        super().__init__(l, n_max)
         self.state_name = "PCS"
+        self.rs = rs
         self.__create_state(l, n_max, rs)
-        self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = None   # TODO: exact average photon number of pcs state
-        # print("PCS aver n: {}".format(self.numeric_num))
+        self.a_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
+        self.b_num = qu.expect(qu.num(self.n_max), self.state.ptrace(1))
+        self.num = self.a_num + self.b_num
+        self.entanglement = qu.entropy_vn(self.state.ptrace(0))
+        # print("{}".format(self.entanglement))
+        # print("PCS aver n: {}".format(self.num))
+
+    def get_attrs(self):
+        return {'State': self.state_name, 'lambda': self.lmd,
+                'Aver_N': self.num, 'A_N': self.a_num, 'B_N': self.b_num,
+                'VN_Entropy': self.entanglement,
+                'ra': self.rs[0], 'rb': self.rs[1]}
 
     def __create_state(self, l, n_max, rs):
         """
@@ -235,7 +258,7 @@ def tm_mix(s, n_max):
     return tmm.expm()
 
 
-def test_run():
+def create_states():
     print('\n')
     n_max = 10
     lmd = np.sqrt(0.01/1.01)
@@ -263,5 +286,16 @@ def test_run():
     print("\nVN entropy: {}".format(qu.entropy_vn(output2.ptrace(1))))
 
 
+def create_pcs():
+    n_max = 10
+    lmd = np.sqrt(0.01 / 1.01)
+
+    points = np.linspace(0, 1, 5)
+    rss = [(ra, rb) for ra in points for rb in points]
+    for rs in rss:
+        PCS(lmd, n_max, rs)
+
+
 if __name__ == "__main__":
-    test_run()
+    # create_states()
+    create_pcs()
