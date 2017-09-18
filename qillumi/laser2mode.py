@@ -97,9 +97,10 @@ class TMSS(LaserTwoMode):
         super().__init__(n_max)
         self.state_name = "TMSS"
         self.state = qu.Qobj(np.sum([l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
-                             for n in np.arange(n_max)]))
+                                     for n in np.arange(n_max)])).unit()
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = l ** 2 / (1 - l ** 2)
+        print("TMSS aver n: {}, {}".format(self.numeric_num, self.exact_num))
 
 
 class PS(LaserTwoMode):
@@ -122,11 +123,11 @@ class PS(LaserTwoMode):
         """
         super().__init__(n_max)
         self.state_name = "PS"
-        self.state = np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
-                             for n in np.arange(n_max)])
+        self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
+                                     for n in np.arange(n_max)])).unit()
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = 2 * l ** 2 * (2 + l ** 2) / (1 - l ** 4)
-        print(self.numeric_num, self.exact_num)
+        print("PS aver n: {}, {}".format(self.numeric_num, self.exact_num))
 
 
 class PA(LaserTwoMode):
@@ -149,11 +150,11 @@ class PA(LaserTwoMode):
         """
         super().__init__(n_max)
         self.state_name = "PA"
-        self.state = np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
-                             for n in np.arange(n_max - 1)])
+        self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
+                                     for n in np.arange(n_max - 1)])).unit()
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = (1 + 4 * l ** 2 + l ** 4) / (1 - l ** 4)
-        print(self.numeric_num, self.exact_num)
+        print("PA aver n:{}, {}".format(self.numeric_num, self.exact_num))
 
 
 class PSA(LaserTwoMode):
@@ -162,11 +163,12 @@ class PSA(LaserTwoMode):
     def __init__(self, l, n_max):
         super().__init__(n_max)
         self.state_name = "PSA"
-        self.state = np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
-                             for n in np.arange(n_max)])
+        self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
+                                     for n in np.arange(n_max)])).unit()
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = 2 * l**2 * (8 + 33 * l**2 + 18 * l**4 + l**6) / (1 + 10 * l**2 - 10 * l**6 + l**8)
-        print(self.numeric_num, self.exact_num)
+        print("PSA aver n: {}, {}".format(self.numeric_num, self.exact_num))
+
 
 class PAS(LaserTwoMode):
     """Photon subtracted then added state"""
@@ -174,11 +176,12 @@ class PAS(LaserTwoMode):
     def __init__(self, l, n_max):
         super().__init__(n_max)
         self.state_name = "PAS"
-        self.state = np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
-                             for n in np.arange(n_max - 1)])
+        self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
+                                     for n in np.arange(n_max - 1)])).unit()
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = (1 + 26 * l**2 + 66 * l**4 + 26 * l**6 + l**8) / (1 + 10 * l**2 - 10 * l**6 - l**8)
-        print(self.numeric_num, self.exact_num)
+        print("PAS aver n: {}, {}".format(self.numeric_num, self.exact_num))
+
 
 class PCS(LaserTwoMode):
     def __init__(self, l, n_max, rs):
@@ -204,7 +207,7 @@ class PCS(LaserTwoMode):
         self.__create_state(l, n_max, rs)
         self.numeric_num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
         self.exact_num = None   # TODO: exact average photon number of pcs state
-        print(self.numeric_num)
+        print("PCS aver n: {}".format(self.numeric_num))
 
     def __create_state(self, l, n_max, rs):
         """
@@ -227,12 +230,13 @@ class PCS(LaserTwoMode):
         state4 = np.sum([l ** n * (n + 1) *
                          qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1)) for n in nums[:-1]])
 
-        self.state = ta * tb * state1 + ta * rb * state2 + ra * tb * state3 + ra * rb * state4
+        self.state = qu.Qobj(ta * tb * state1 + ta * rb * state2 + ra * tb * state3 + ra * rb * state4).unit()
 
 
 def test_run():
-    n_max = 30
-    lmd = 0.1
+    print('\n')
+    n_max = 10
+    lmd = np.sqrt(0.01/1.01)
     # Test creating states
     state_all = [TMSS(lmd, n_max), PS(lmd, n_max), PA(lmd, n_max),
                  PSA(lmd, n_max), PAS(lmd, n_max), PCS(lmd, n_max, (0.7, 0.7))]

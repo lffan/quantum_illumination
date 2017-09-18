@@ -13,7 +13,7 @@ from qillumi import laser2mode as l2m
 __author__ = 'Longfei Fan'
 
 
-def Helstrom(rho0, rho1, p0=0.5, M=1):
+def qu_helstrom(rho0, rho1, p0=0.5, M=1):
     """ Calculate Helstrom error probability
         which is defined as
 
@@ -24,13 +24,12 @@ def Helstrom(rho0, rho1, p0=0.5, M=1):
         M: number of copies
     """
     if M == 1:
-        gamma = (1 - p0) * rho1 - p0 * rho0
-        return 0.5 * (1 - gamma.norm())
+        return 0.5 * (1 - ((1 - p0) * rho1 - p0 * rho0).norm())
     else:
         pass  # TODO: for those M != 1
 
 
-def QuChernoff(rho0, rho1, approx=False):
+def qu_chernoff(rho0, rho1, approx=False):
     """ Approximated Q for QCB
         Actually the trace of sqrt(rho_1) * sqrt(rho_2)
     """
@@ -92,15 +91,15 @@ class QIExpr(object):
 
         return laser
 
-    def set_input_laser(self, state_name, l, rs=False):
+    def set_input_laser(self, state_name, lmd, rs=False):
         """
         Setup the two-mode entangled laser as input
         Parameters
         ----------
         state_name: string
             to specific what kind of laser as an input
-        l: float
-            lambda parameter for the laser
+        lmd: float
+            lambda parameter for the laser, lmd = (N / (1 + N)) ** 0.5
         rs: 2-elements tuple of float
             used for PCS state
 
@@ -109,7 +108,7 @@ class QIExpr(object):
         no return, alternate self.laser inplace
 
         """
-        self.laser = self.__create_laser(state_name, l, rs)
+        self.laser = self.__create_laser(state_name, lmd, rs)
 
     def set_environment(self, reflectance, nth):
         """
@@ -153,18 +152,18 @@ class QIExpr(object):
     #     self.thermal_1 = qu.thermal_dm(self.n_max, nth / (1 - rfl))
     #     self.rfl = rfl
 
-    def evolve_rho0(self):
+    def __evolve_rho0(self):
         """
         Output state rho 0 if an object is absent
         """
-        rho_ab = qu.ket2dm(self.laser)
+        rho_ab = qu.ket2dm(self.laser.state)
         return qu.tensor(rho_ab.ptrace(0), self.thermal_0)  # rho_A (index 0) is kept here.
 
-    def evolve_rho1(self):
+    def __evolve_rho1(self):
         """
         Output state rho 1 if an object is present
         """
-        rho_ab = qu.ket2dm(self.laser)
+        rho_ab = qu.ket2dm(self.laser.state)
         rho_abc = qu.tensor(rho_ab, self.thermal_1)
 
         # state A unchanged, tm_mixing acted on state B and thermal
@@ -178,10 +177,35 @@ class QIExpr(object):
         """
         Run the experiment according to the parameters setup
         """
-        rho0 = self.evolve_rho0()
-        rho1 = self.evolve_rho1()
-        helstrom = Helstrom(rho0, rho1)
-        qcb = QuChernoff(rho0, rho1, approx=True)
+        rho0 = self.__evolve_rho0()
+        rho1 = self.__evolve_rho1()
+        qhb = qu_helstrom(rho0, rho1)
+        qcb = qu_chernoff(rho0, rho1, approx=True)
         qcb1 = upper_bound(qcb, M=1)
+        return qhb, qcb, qcb1
 
 
+def run(n_max, nth, ns, rflct, rs):
+    lmd = np.sqrt(ns / (1 + ns))
+
+    expr = QIExpr(n_max)
+    expr.set_environment(rflct, nth)
+
+    print("\nHelstrom Bounds")
+    for name in ('TMSS', 'PS', 'PA', 'PSA', 'PAS'):
+        expr.set_input_laser(name, lmd)
+        print("{} QHB: {}".format(name, expr.run_expr()[0]))
+        print("{} QCB: {}".format(name, expr.run_expr()[2]))
+    expr.set_input_laser('PCS', lmd, rs)
+    print("{} QHB: {}".format('PCS', expr.run_expr()[0]))
+    print("{} QCB: {}".format('PCS', expr.run_expr()[2]))
+
+
+def test_run():
+    run(11, 0.1, 0.01, 0.01, (0.7071, 0.7071))
+    run(16, 1.0, 0.01, 0.01, (0.7071, 0.7071))
+    run(21, 10.0, 0.01, 0.01, (0.7071, 0.7071))
+
+
+if __name__ == "__main__":
+    test_run()
