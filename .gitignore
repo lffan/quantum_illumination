@@ -8,6 +8,7 @@
 *.npz
 *.csv
 *.out
+*.bak
 test*
 dev*
 .ipynb_checkpoints

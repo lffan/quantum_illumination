@@ -42,7 +42,8 @@ class LaserTwoMode(object):
 
     def get_attrs(self):
         return {'State': self.state_name, 'lambda': self.lmd,
-                'Aver_N': self.num, 'VN_Entropy': self.entanglement}
+                'Aver_N': self.num, 'A_N': self.num / 2, 'B_N': self.num / 2,
+                'VN_Entropy': self.entanglement}
 
 
 class TMSS(LaserTwoMode):
