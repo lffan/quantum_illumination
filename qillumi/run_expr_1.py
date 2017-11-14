@@ -48,26 +48,25 @@ def expr_one_basic():
     df = pd.DataFrame(columns=cols)
     names = ('TMSS', 'PS', 'PA', 'PAS', 'PSA', 'PCS')
 
-    df = run_all_states(names, 10, 0.1, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 12, 0.33, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 15, 1.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 17, 3.3, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 8, 0.1, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 16, 1.0, 0.01, 0.01, (0.4, 0.4), df)
     df = run_all_states(names, 20, 10.0, 0.01, 0.01, (0.4, 0.4), df)
 
-    filename = '../output/expr_1_basic.csv'
+    filename = '../output/expr_1_basic_{}.csv'.\
+        format(datetime.today().strftime('%m-%d'))
     file = open(filename, 'w')
     file.write("# Quantum Illumination Experiment\n")
     file.write("# Several basic results for all kind of states, "
                "with different noise level (Nth).\n")
     file.write('# Author: L. Fan\n')
-    file.write('# Created on: {}\n\n'.format(str(datetime.now())))
+    file.write('# Created on: {}\n#\n'.format(str(datetime.now())))
     file.close()
 
     df.fillna('')
     df.to_csv(filename, index=False, columns=cols, mode='a')
 
 
-def expr_two_pcs_same_ns(grid_divides):
+def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, grid_divides):
     points = np.linspace(0, 1, grid_divides)
     rss = [(ra, rb) for ra in points for rb in points]
 
@@ -75,9 +74,9 @@ def expr_two_pcs_same_ns(grid_divides):
             'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
     df = pd.DataFrame(columns=cols)
 
-    lmd = np.sqrt(0.01 / (1 + 0.01))
-    expr = QIExpr(n_max=10)
-    expr.set_environment(reflectance=0.01, nth=10)
+    lmd = np.sqrt(ns / (1 + ns))
+    expr = QIExpr(n_max=n_max)
+    expr.set_environment(reflectance=rflct, nth=nth)
 
     # print("\nHelstrom Bounds\n")
     @log
@@ -90,17 +89,19 @@ def expr_two_pcs_same_ns(grid_divides):
         new_df = pd.DataFrame.from_dict({'res': expr.get_attrs()}, orient='index')
         df = df.append(new_df)
 
-    filename = "../output/expr_2_pcs_grid{}.csv".format(grid_divides)
+    filename = "../output/expr_2_pcs_n_max_{}_nth_{}_grid_{}_{}.csv"\
+        .format(n_max, nth, grid_divides, datetime.today().strftime('%m-%d'))
     file = open(filename, 'w')
     file.write("# Quantum Illumination Experiment\n")
     file.write("# PCS state with same lambda but different ra and rb.\n")
+    file.write("# n_max: {}, nth: {}, ns: {}, rflct: {}\n".format(n_max, nth, ns, rflct))
     file.write('# Author: L. Fan\n')
     file.write('# Created on: {}\n\n'.format(str(datetime.now())))
     file.close()
     df.to_csv(filename, index=False, columns=cols, mode='a')
 
 
-def expr_three_qhb_vs_e(nss_divides):
+def expr_three_qhb_vs_energy(nss_divides):
     nss = np.linspace(0.01, 3, nss_divides)
     lambdas = np.sqrt(nss / (1.0 + nss))
 
@@ -143,6 +144,6 @@ def expr_four_pcs_same_ns():
 if __name__ == "__main__":
     start_time = time.time()
     # expr_one_basic()
-    # expr_two_pcs_same_ns(101)
-    expr_three_qhb_vs_e(101)
+    expr_two_pcs_vs_rs(n_max=20, nth=1, ns=0.01, rflct=0.01, grid_divides=26)
+    # expr_three_qhb_vs_energy(101)
     print("--- %s seconds ---" % (time.time() - start_time))
