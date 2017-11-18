@@ -1,0 +1,10 @@
+]0;IPython: quantum_illumination/qillumi[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/home/longfei/code_research/quantum_illumination/qillumi/run_expr_1.py[0m in [0;36m<module>[0;34m()[0m
+[1;32m      4[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+[0;32m----> 6[0;31m [0;32mfrom[0m [0mqillumi[0m[0;34m.[0m[0mqi[0m [0;32mimport[0m [0mQIExpr[0m[0;34m[0m[0m
+[0m[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'qillumi'

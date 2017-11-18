@@ -42,7 +42,7 @@ class LaserTwoMode(object):
 
     def get_attrs(self):
         return {'State': self.state_name, 'lambda': self.lmd,
-                'Aver_N': self.num, 'A_N': self.num / 2, 'B_N': self.num / 2,
+                'Aver_N': self.num, 'A_aver_N': self.num / 2, 'B_aver_N': self.num / 2,
                 'VN_Entropy': self.entanglement}
 
 
@@ -191,7 +191,7 @@ class PCS(LaserTwoMode):
 
     def get_attrs(self):
         return {'State': self.state_name, 'lambda': self.lmd,
-                'Aver_N': self.num, 'A_N': self.a_num, 'B_N': self.b_num,
+                'Aver_N': self.num, 'A_aver_N': self.a_num, 'B_aver_N': self.b_num,
                 'VN_Entropy': self.entanglement,
                 'ra': self.rs[0], 'rb': self.rs[1]}
 

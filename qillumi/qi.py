@@ -128,14 +128,14 @@ class QIExpr(object):
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)
 
-    def get_attrs(self):
+    def get_results(self):
         """
         Return some useful information
         """
         laser_attrs = self.laser.get_attrs()
         expr_attrs = {'Nth': self.nth, 'R': self.reflectance,
-                      'Helstrom': self.qhb, 'Chernoff': self.qcb[1],
-                      'S_opt': np.round(self.qcb[0], 6)}
+                      'Helstrom_Bound': self.qhb, 'Chernoff_Bound': self.qcb[1],
+                      'optimal_s': np.round(self.qcb[0], 6)}
         return {**laser_attrs, **expr_attrs}
 
 
@@ -194,9 +194,11 @@ def qu_helstrom(rho0, rho1, p0=0.5, M=1):
         pi_0, rho_0: state 1 and its a priori probability pi_0
         pi_1, rho_1: state 2 and its a priori probability pi_1
         M: number of copies
+        || rho || is the trace norm
     """
     if M == 1:
-        return 0.5 * (1 - ((1 - p0) * rho1 - p0 * rho0).norm())
+        q1 = 0.5 * (1 - ((1 - p0) * rho1 - p0 * rho0).norm())
+        return q1
     else:
         pass  # TODO: for those M != 1
 
@@ -216,7 +218,6 @@ def qu_chernoff(rho0, rho1, approx=False):
         # s = 0.5
         return 0.5, (rho0.sqrtm() * rho1.sqrtm()).tr().real
     else:
-        # TODO: give the optimal QCB by varying value of s
         res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
                        method='Nelder-Mead', options={'disp': False})
         s = res.x[0]
@@ -252,7 +253,7 @@ def run(n_max, nth, ns, rflct, rs):
         else:
             expr.set_input_laser('PCS', lmd, rs)
         expr.run_expr()
-        print(expr.get_attrs())
+        print(expr.get_results())
 
 
 def expr_one():

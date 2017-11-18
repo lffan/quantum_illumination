@@ -3,7 +3,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from qillumi.qi_utils import QIExpr
+from qillumi.qi import QIExpr
 
 
 count = 0
@@ -35,7 +35,7 @@ def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
         else:
             expr.set_input_laser('PCS', lmd, rs)
         expr.run_expr()
-        new_df = pd.DataFrame.from_dict({'res': expr.get_attrs()}, orient='index')
+        new_df = pd.DataFrame.from_dict({'res': expr.get_results()}, orient='index')
         df = df.append(new_df)
 
     return df
@@ -43,14 +43,14 @@ def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
 
 def expr_one_basic():
     cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
-            'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt',
-            'A_N', 'B_N', 'ra', 'rb']
+            'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+            'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
-    names = ('TMSS', 'PS', 'PA', 'PAS', 'PSA', 'PCS')
+    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
-    df = run_all_states(names, 8, 0.1, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 16, 1.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 20, 10.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 12, 0.1, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 24, 1.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 24, 10.0, 0.01, 0.01, (0.4, 0.4), df)
 
     filename = '../output/expr_1_basic_{}.csv'.\
         format(datetime.today().strftime('%m-%d'))
@@ -66,84 +66,23 @@ def expr_one_basic():
     df.to_csv(filename, index=False, columns=cols, mode='a')
 
 
-def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, grid_divides):
-    points = np.linspace(0, 1, grid_divides)
-    rss = [(ra, rb) for ra in points for rb in points]
-
-    cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
-            'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
+def check_n_max(Nth, low, high):
+    cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
+            'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+            'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
-
-    lmd = np.sqrt(ns / (1 + ns))
-    expr = QIExpr(n_max=n_max)
-    expr.set_environment(reflectance=rflct, nth=nth)
-
-    # print("\nHelstrom Bounds\n")
-    @log
-    def set_laser(rs_t):
-        expr.set_input_laser('PCS', lmd, rs_t)
-
-    for rs in rss:
-        set_laser(rs)
-        expr.run_expr()
-        new_df = pd.DataFrame.from_dict({'res': expr.get_attrs()}, orient='index')
-        df = df.append(new_df)
-
-    filename = "../output/expr_2_pcs_n_max_{}_nth_{}_grid_{}_{}.csv"\
-        .format(n_max, nth, grid_divides, datetime.today().strftime('%m-%d'))
-    file = open(filename, 'w')
-    file.write("# Quantum Illumination Experiment\n")
-    file.write("# PCS state with same lambda but different ra and rb.\n")
-    file.write("# n_max: {}, nth: {}, ns: {}, rflct: {}\n".format(n_max, nth, ns, rflct))
-    file.write('# Author: L. Fan\n')
-    file.write('# Created on: {}\n\n'.format(str(datetime.now())))
-    file.close()
-    df.to_csv(filename, index=False, columns=cols, mode='a')
-
-
-def expr_three_qhb_vs_energy(nss_divides):
-    nss = np.linspace(0.01, 3, nss_divides)
-    lambdas = np.sqrt(nss / (1.0 + nss))
-
-    cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
-            'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
-    df = pd.DataFrame(columns=cols)
-
-    expr = QIExpr(n_max=10)
-    expr.set_environment(reflectance=0.01, nth=0.1)
-
-    @log
-    def set_laser(s_name, l):
-        if s_name != 'PCS':
-            expr.set_input_laser(s_name, l)
-        else:
-            expr.set_input_laser('PCS', l, rs=(0.1, 0.9))
-
-    for lmd in lambdas:
-        for name in ('TMSS', 'PS', 'PA', 'PAS', 'PSA', 'PCS'):
-            set_laser(name, lmd)
-            expr.run_expr()
-            new_df = pd.DataFrame.from_dict({'res': expr.get_attrs()},
-                                            orient='index')
-            df = df.append(new_df)
-
-    filename = "../output/expr_3_lmd_p{}.csv".format(nss_divides)
-    file = open(filename, 'w')
-    file.write("# Quantum Illumination Experiment\n")
-    file.write("# Experiment for all states vs lambda.\n")
-    file.write('# Author: L. Fan\n')
-    file.write('# Created on: {}\n\n'.format(str(datetime.now())))
-    file.close()
-    df.to_csv(filename, index=False, columns=cols, mode='a')
-
-
-def expr_four_pcs_same_ns():
-    pass
+    names = ('TMSS',)
+    for n_max in range(low, high):
+        df = run_all_states(names, n_max, Nth, 0.01, 0.01, (0.4, 0.4), df)
+        # print(df.iloc[-1])
+        print("Helstrom: {:.11f}".format(df.iloc[-1]['Helstrom_Bound']))
+        print("Chernoff: {:.11f}".format(df.iloc[-1]['Chernoff_Bound']))
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    # expr_one_basic()
-    expr_two_pcs_vs_rs(n_max=20, nth=1, ns=0.01, rflct=0.01, grid_divides=26)
-    # expr_three_qhb_vs_energy(101)
+    # check_n_max(0.1, 8, 16)
+    # check_n_max(1.0, 16, 25)
+    # check_n_max(10, 20, 25)
+    expr_one_basic()
     print("--- %s seconds ---" % (time.time() - start_time))
