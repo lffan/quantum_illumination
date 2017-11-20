@@ -4,30 +4,27 @@ import numpy as np
 import pandas as pd
 
 from qillumi.qi import QIExpr
-
-
-count = 0
-
-
-def log(func):
-    def wrapper(*args, **kw):
-        global count
-        count += 1
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        func_name = func.__name__
-        paras = args[1:-1] if func_name == 'run_all_states' else args
-        print('{}: {:d} {}{}\t'.format(now, count, func_name, paras))
-        return func(*args, **kw)
-    return wrapper
+from qillumi.utils import log
 
 
 @log
 def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
     """
     run experiments given the provided parameters
+
     Parameters
     ----------
-    state_names: a list of strings of state names
+    state_names: tuple of string, indicating input states
+    n_max: integer, truncated photon numbers
+    nth: double, average thermal noise number
+    ns: double, N_s parameter of the two mode squeezed state
+    rflct: double, reflectance of the target object
+    rs: tuple of double, parameters for PCS states
+    df: dataframe, running results
+
+    Returns
+    -------
+    df: a pandas dataframe recording running results
     """
     lmd = np.sqrt(ns / (1 + ns))
     expr = QIExpr(n_max)
@@ -46,32 +43,43 @@ def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
     return df
 
 
-def expr_one_basic():
+def expr_one_basic(df, names, configs):
     """
     run experiments on different noise levels
+    """
+    for N_max, Nth in configs:
+        df = run_all_states(names, N_max, Nth, 0.01, 0.01, (0.4, 0.4), df)
+    return df
+
+
+def run_and_save_data(names, configs):
+    """
+    run experiments given the state names and configuration
+
+    Parameters
+    ----------
+    names: tuple of strings, states to be run
+    configs: tuple of double, (N_max, Nth)
+
+    Returns
+    -------
+
     """
     cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
-    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
-    df = run_all_states(names, 8, 0.1, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 16, 0.5, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 24, 1.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 24, 2.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 32, 4.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 32, 10.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = expr_one_basic(df, names, configs)
 
     filename = '../output/expr_1_basic_{}.csv'.\
         format(datetime.today().strftime('%m-%d'))
-    file = open(filename, 'w')
-    file.write("# Quantum Illumination Experiment\n")
-    file.write("# Several basic results for all kind of states, "
-               "with different noise level (Nth).\n")
-    file.write('# Author: L. Fan\n')
-    file.write('# Created on: {}\n#\n'.format(str(datetime.now())))
-    file.close()
+    with open(filename, 'w') as file:
+        file.write("# Quantum Illumination Experiment\n")
+        file.write("# Several basic results for all kind of states, "
+                   "with different noise level (Nth).\n")
+        file.write('# Author: L. Fan\n')
+        file.write('# Created on: {}\n#\n'.format(str(datetime.now())))
 
     df.fillna('')
     df.to_csv(filename, index=False, columns=cols, mode='a')
@@ -85,7 +93,7 @@ def check_n_max(Nth, low, high):
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
-    names = ('TMSS',)
+    names = ('PCS',)
     for n_max in range(low, high):
         df = run_all_states(names, n_max, Nth, 0.01, 0.01, (0.4, 0.4), df)
         # print(df.iloc[-1])
@@ -94,9 +102,14 @@ def check_n_max(Nth, low, high):
 
 
 if __name__ == "__main__":
-    start_time = time.time()
+    # check if results converge for a given N_max
     # check_n_max(0.1, 8, 16)
     # check_n_max(1.0, 16, 25)
     # check_n_max(4, 28, 36)
-    expr_one_basic()
+
+    states = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', )
+    # expr_configs = [(8, 0.1), (16, 0.5)]
+    expr_configs = [(8, 0.1), (16, 0.5), (24, 1.0), (24, 2.0), (32, 4.0)]
+    start_time = time.time()
+    run_and_save_data(states, expr_configs)
     print("--- %s seconds ---" % (time.time() - start_time))
