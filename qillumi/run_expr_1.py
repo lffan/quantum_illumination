@@ -23,7 +23,12 @@ def log(func):
 
 @log
 def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
-
+    """
+    run experiments given the provided parameters
+    Parameters
+    ----------
+    state_names: a list of strings of state names
+    """
     lmd = np.sqrt(ns / (1 + ns))
     expr = QIExpr(n_max)
     expr.set_environment(rflct, nth)
@@ -42,15 +47,18 @@ def run_all_states(state_names, n_max, nth, ns, rflct, rs, df):
 
 
 def expr_one_basic():
+    """
+    run experiments on different noise levels
+    """
     cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
-    df = run_all_states(names, 12, 0.1, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 24, 1.0, 0.01, 0.01, (0.4, 0.4), df)
-    df = run_all_states(names, 24, 10.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 16, 0.5, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 24, 2.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 32, 4.0, 0.01, 0.01, (0.4, 0.4), df)
 
     filename = '../output/expr_1_basic_{}.csv'.\
         format(datetime.today().strftime('%m-%d'))
@@ -67,6 +75,9 @@ def expr_one_basic():
 
 
 def check_n_max(Nth, low, high):
+    """
+    check if results converges on the selected N_max
+    """
     cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
@@ -83,6 +94,6 @@ if __name__ == "__main__":
     start_time = time.time()
     # check_n_max(0.1, 8, 16)
     # check_n_max(1.0, 16, 25)
-    # check_n_max(10, 20, 25)
+    # check_n_max(4, 28, 36)
     expr_one_basic()
     print("--- %s seconds ---" % (time.time() - start_time))
