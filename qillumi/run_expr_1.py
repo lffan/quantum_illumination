@@ -56,9 +56,12 @@ def expr_one_basic():
     df = pd.DataFrame(columns=cols)
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
+    df = run_all_states(names, 8, 0.1, 0.01, 0.01, (0.4, 0.4), df)
     df = run_all_states(names, 16, 0.5, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 24, 1.0, 0.01, 0.01, (0.4, 0.4), df)
     df = run_all_states(names, 24, 2.0, 0.01, 0.01, (0.4, 0.4), df)
     df = run_all_states(names, 32, 4.0, 0.01, 0.01, (0.4, 0.4), df)
+    df = run_all_states(names, 32, 10.0, 0.01, 0.01, (0.4, 0.4), df)
 
     filename = '../output/expr_1_basic_{}.csv'.\
         format(datetime.today().strftime('%m-%d'))
