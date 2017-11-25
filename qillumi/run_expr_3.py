@@ -24,9 +24,11 @@ def log(func):
 def expr_three_qhb_vs_energy(nss_divides):
     nss = np.linspace(0.01, 3, nss_divides)
     lambdas = np.sqrt(nss / (1.0 + nss))
-
-    cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
-            'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
+    cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
+            'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+            'A_aver_N', 'B_aver_N', 'ra', 'rb']
+    # cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
+    #         'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
     df = pd.DataFrame(columns=cols)
 
     expr = QIExpr(n_max=10)

@@ -11,9 +11,11 @@ from qillumi.utils import log
 def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, grid_divides):
     points = np.linspace(0, 1, grid_divides)
     rss = [(ra, rb) for ra in points for rb in points]
-
-    cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
-            'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
+    cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
+            'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+            'A_aver_N', 'B_aver_N', 'ra', 'rb']
+    # cols = ['Nth', 'R', 'State', 'lambda', 'ra', 'rb', 'Aver_N',
+    #         'A_N', 'B_N', 'VN_Entropy', 'Helstrom', 'Chernoff', 'S_opt']
     df = pd.DataFrame(columns=cols)
 
     lmd = np.sqrt(ns / (1 + ns))
@@ -48,5 +50,5 @@ def write_data_to_file(df, n_max, nth, ns, rflct, grid_divides, cols):
 if __name__ == "__main__":
     start_time = time.time()
     # expr_two_pcs_vs_rs(n_max=8, nth=0.1, ns=0.01, rflct=0.01, grid_divides=101)
-    expr_two_pcs_vs_rs(n_max=24, nth=1, ns=0.01, rflct=0.01, grid_divides=26)
+    expr_two_pcs_vs_rs(n_max=24, nth=1, ns=0.01, rflct=0.01, grid_divides=3)
     print("--- %s seconds ---" % (time.time() - start_time))
