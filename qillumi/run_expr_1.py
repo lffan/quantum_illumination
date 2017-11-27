@@ -107,9 +107,9 @@ if __name__ == "__main__":
     # check_n_max(1.0, 16, 25)
     # check_n_max(4, 28, 36)
 
-    states = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', )
+    states = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
     # expr_configs = [(8, 0.1), (16, 0.5)]
-    expr_configs = [(8, 0.1), (16, 0.5), (24, 1.0), (24, 2.0), (32, 4.0)]
+    expr_configs = [(8, 0.1), (16, 0.5), (24, 1.0), (24, 2.0)]
     start_time = time.time()
     run_and_save_data(states, expr_configs)
     print("--- %s seconds ---" % (time.time() - start_time))

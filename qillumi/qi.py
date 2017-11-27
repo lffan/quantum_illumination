@@ -116,14 +116,15 @@ class QIExpr(object):
 
         return rho_1.ptrace([0, 1])  # keep A and B (index 0, 1)
 
-    def run_expr(self):
+    def run_expr(self, qcb_approx=False):
         """
         Run the experiment according to the parameters setup
         """
         rho0 = self.__evolve_rho0()
         rho1 = self.__evolve_rho1()
         self.qhb = qu_helstrom(rho0, rho1)
-        qcb = qu_chernoff(rho0, rho1, approx=False)
+        qcb = qu_chernoff(rho0, rho1, approx=qcb_approx)
+        # qcb = (0.5, 0.5) # for test
         self.qcb[0] = qcb[0]
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)

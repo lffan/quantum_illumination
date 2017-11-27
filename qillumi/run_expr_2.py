@@ -28,7 +28,7 @@ def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, grid_divides):
 
     for rs in rss:
         set_laser(rs)
-        expr.run_expr()
+        expr.run_expr(qcb_approx=True)
         new_df = pd.DataFrame.from_dict({'res': expr.get_results()}, orient='index')
         df = df.append(new_df)
 
@@ -50,5 +50,5 @@ def write_data_to_file(df, n_max, nth, ns, rflct, grid_divides, cols):
 if __name__ == "__main__":
     start_time = time.time()
     # expr_two_pcs_vs_rs(n_max=8, nth=0.1, ns=0.01, rflct=0.01, grid_divides=101)
-    expr_two_pcs_vs_rs(n_max=24, nth=1, ns=0.01, rflct=0.01, grid_divides=3)
+    expr_two_pcs_vs_rs(n_max=24, nth=1, ns=0.01, rflct=0.01, grid_divides=51)
     print("--- %s seconds ---" % (time.time() - start_time))

@@ -41,7 +41,7 @@ class LaserTwoMode(object):
             raise ValueError("N must be a positive integer.")
 
     def get_attrs(self):
-        return {'State': self.state_name, 'lambda': self.lmd,
+        return {'State': self.state_name, 'lambda': self.lmd, 'Exact_N': self.exact_num,
                 'Aver_N': self.num, 'A_aver_N': self.num / 2, 'B_aver_N': self.num / 2,
                 'VN_Entropy': self.entanglement}
 
@@ -56,7 +56,7 @@ class TMSS(LaserTwoMode):
         state parameter, for TMSS l = tanh(s), where s is the squeezed para
     n_max: positive int
         photon truncation number as we are doing numerical calculation
-        i.e. photon numbers can be in [0, n_max - 1]
+    expr.set_input_laser(s_name, l)   i.e. photon numbers can be in [0, n_max - 1]
 
     Return
     ------
@@ -97,8 +97,8 @@ class PS(LaserTwoMode):
         self.state_name = "PS"
         self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                                      for n in np.arange(n_max)])).unit()
-        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = 2 * l ** 2 * (2 + l ** 2) / (1 - l ** 4)
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0)) * 2
+        self.exact_num = 4 * l ** 2 * (2 + l ** 2) / (1 - l ** 4)
         self.entanglement = qu.entropy_vn(self.state.ptrace(0))
         # print("PS aver n: {}, {}".format(self.num, self.exact_num))
 
@@ -125,8 +125,8 @@ class PA(LaserTwoMode):
         self.state_name = "PA"
         self.state = qu.Qobj(np.sum([(n + 1) * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                                      for n in np.arange(n_max - 1)])).unit()
-        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = (1 + 4 * l ** 2 + l ** 4) / (1 - l ** 4)
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0)) * 2
+        self.exact_num = 2 * (1 + 4 * l ** 2 + l ** 4) / (1 - l ** 4)
         self.entanglement = qu.entropy_vn(self.state.ptrace(0))
         # print("PA aver n:{}, {}".format(self.num, self.exact_num))
 
@@ -139,8 +139,8 @@ class PSA(LaserTwoMode):
         self.state_name = "PSA"
         self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n), qu.basis(n_max, n))
                                      for n in np.arange(n_max)])).unit()
-        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = 2 * l**2 * (8 + 33 * l**2 + 18 * l**4 + l**6) / (1 + 10 * l**2 - 10 * l**6 + l**8)
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0)) * 2
+        self.exact_num = 4 * l**2 * (8 + 33 * l**2 + 18 * l**4 + l**6) / (1 + 10 * l**2 - 10 * l**6 + l**8)
         self.entanglement = qu.entropy_vn(self.state.ptrace(0))
         # print("PSA aver n: {}, {}".format(self.num, self.exact_num))
 
@@ -153,8 +153,8 @@ class PAS(LaserTwoMode):
         self.state_name = "PAS"
         self.state = qu.Qobj(np.sum([(n + 1) ** 2 * l ** n * qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1))
                                      for n in np.arange(n_max - 1)])).unit()
-        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0))
-        self.exact_num = (1 + 26 * l**2 + 66 * l**4 + 26 * l**6 + l**8) / (1 + 10 * l**2 - 10 * l**6 - l**8)
+        self.num = qu.expect(qu.num(self.n_max), self.state.ptrace(0)) * 2
+        self.exact_num = 2 * (1 + 26 * l**2 + 66 * l**4 + 26 * l**6 + l**8) / (1 + 10 * l**2 - 10 * l**6 - l**8)
         self.entanglement = qu.entropy_vn(self.state.ptrace(0))
         # print("PAS aver n: {}, {}".format(self.num, self.exact_num))
 
@@ -216,7 +216,8 @@ class PCS(LaserTwoMode):
         state4 = np.sum([l ** n * (n + 1) *
                          qu.tensor(qu.basis(n_max, n + 1), qu.basis(n_max, n + 1)) for n in nums[:-1]])
 
-        self.state = qu.Qobj(ta * tb * state1 + ta * rb * state2 + ra * tb * state3 + ra * rb * state4).unit()
+        self.state = qu.Qobj(ta * tb * state1 + ta * rb * state2 +
+                             ra * tb * state3 + ra * rb * state4).unit()
 
 
 def tm_sqz(s, n_max):
