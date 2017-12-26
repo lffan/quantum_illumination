@@ -50,12 +50,12 @@ def basic_attributes_2(n_max, divides):
     lasers = {'TMSS': laser.TMSS, 'PS': laser.PS, 'PA': laser.PA,
               'PSA': laser.PSA, 'PAS': laser.PAS, 'PCS': laser.PCS}
 
-    lambdas = {'TMSS': np.linspace(0.001, 0.201, divides),
-               'PS': np.linspace(0.001, 0.201, divides),
-               'PA': np.linspace(0.001, 0.201, divides),
-               'PSA': np.linspace(0.001, 0.201, divides),
-               'PAS': np.linspace(0.001, 0.201, divides),
-               'PCS': np.linspace(0.001, 0.201, divides)}
+    lambdas = {'TMSS': np.linspace(0.001, 0.401, divides),
+               'PS': np.linspace(0.001, 0.401, divides),
+               'PA': np.linspace(0.001, 0.401, divides),
+               'PSA': np.linspace(0.001, 0.401, divides),
+               'PAS': np.linspace(0.001, 0.401, divides),
+               'PCS': np.linspace(0.001, 0.401, divides)}
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
     @log
