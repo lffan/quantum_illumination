@@ -9,8 +9,6 @@
 *.csv
 *.out
 *.bak
-test*
-dev*
 .ipynb_checkpoints
 __pycache__
 slides
