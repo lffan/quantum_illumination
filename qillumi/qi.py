@@ -109,12 +109,37 @@ class QIExpr(object):
         rho_ab = qu.ket2dm(self.laser.state)
         rho_abc = qu.tensor(rho_ab, self.thermal_1)
 
-        # state A unchanged, tm_mixing acted on state B and thermal
+        # Note: if we label b, c, b', c' in the following way,
+        #       the order of b, c in density operators will be kept after mixing
+        #          c
+        #         \
+        #  b --->  \ ---> b'
+        #           \
+        #          c'
+        # |b>|c> --> mixing --> |b'>|c'>
+        # b' = cos(s) b + sin(s) c
+        # So we set a low transmission rate
         xi = np.arccos(np.sqrt(self.reflectance))
+        # So 'self.reflectance' is actually transmission rate !!!
+
+        # Additional note for the other labeling method
+        #          c
+        #         \
+        #  b --->  \ ---> c'
+        #           \
+        #          b'
+        # |b>|c> --> mixing --> |c'>|b'>
+        # b' = cos(s) c - sin(s) b
+        # Now we should set low reflectance.
+
+        # state A unchanged, tm_mixing acted on state B and thermal
         op = qu.tensor(qu.qeye(self.n_max), l2m.tm_mix(xi, self.n_max))
         rho_1 = op * rho_abc * op.dag()
 
+        # Notice that we kept 0, and 1, as the order of a, b, c is kept after
+        # mixing when we use the first labeling method
         return rho_1.ptrace([0, 1])  # keep A and B (index 0, 1)
+
 
     def run_expr(self, qcb_approx=False):
         """
@@ -241,6 +266,15 @@ def lower_bound(tr, M):
     return (1 - np.sqrt(1 - tr ** (2 * M))) / 2
 
 
+# for test only
+# def t_mixing(n_max, nth, ns, rflct, rs):
+#     lmd = np.sqrt(ns / (1 + ns))
+#     expr = QIExpr(n_max)
+#     expr.set_environment(rflct, nth)
+#     expr.set_input_laser('TMSS', lmd)
+
+
+# for test only
 def run(n_max, nth, ns, rflct, rs):
 
     lmd = np.sqrt(ns / (1 + ns))
@@ -257,6 +291,7 @@ def run(n_max, nth, ns, rflct, rs):
         print(expr.get_results())
 
 
+# for test only
 def expr_one():
     run(10, 0.1, 0.01, 0.01, (0.4, 0.4))
     run(15, 1.0, 0.01, 0.01, (0.4, 0.4))

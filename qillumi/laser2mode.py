@@ -264,15 +264,17 @@ def create_states():
     print('\n')
     n_max = 10
     lmd = np.sqrt(0.01/1.01)
+
     # Test creating states
     state_all = [TMSS(lmd, n_max), PS(lmd, n_max), PA(lmd, n_max),
                  PSA(lmd, n_max), PAS(lmd, n_max), PCS(lmd, n_max, (0.7, 0.7))]
+
     for item in state_all:
         name = item.state_name
         state = item.state
-        print("State: {}".format(name))
-        print("Mean n: {}".format(qu.expect(qu.num(item.n_max), state.ptrace(1))))
-        print("VN entropy: {}\n".format(qu.entropy_vn(state.ptrace(1))))
+        print("State: {}".format(item.state_name))
+        print("Aver N: {:f} (numerical), {:f} (analytical)".format(item.num, item.exact_num if item.state_name != 'PCS' else 0))
+        print("Entropy of entanglement: {:f}\n".format(item.entanglement))
 
     # Test two-mode mixing
     input1 = qu.ket2dm(qu.tensor(qu.basis(2, 0), qu.basis(2, 1)))
@@ -282,10 +284,11 @@ def create_states():
     print(output1)
 
     # Test two-mode squeezing
+    s = np.arctanh(lmd)
     input2 = qu.ket2dm(qu.tensor(qu.basis(n_max, 0), qu.basis(n_max, 0)))
-    tm_sqz_op = tm_sqz(0.1, n_max)
+    tm_sqz_op = tm_sqz(s, n_max)
     output2 = tm_sqz_op * input2 * tm_sqz_op.dag()
-    print("\nVN entropy: {}".format(qu.entropy_vn(output2.ptrace(1))))
+    print("\nEntropy of entanglement: {}".format(qu.entropy_vn(output2.ptrace(1))))
 
 
 def create_pcs():
@@ -295,9 +298,10 @@ def create_pcs():
     points = np.linspace(0, 1, 5)
     rss = [(ra, rb) for ra in points for rb in points]
     for rs in rss:
-        PCS(lmd, n_max, rs)
+        pcs = PCS(lmd, n_max, rs)
+        print(pcs.get_attrs())
 
 
 if __name__ == "__main__":
-    # create_states()
+    create_states()
     create_pcs()
