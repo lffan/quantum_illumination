@@ -109,30 +109,31 @@ class QIExpr(object):
         rho_ab = qu.ket2dm(self.laser.state)
         rho_abc = qu.tensor(rho_ab, self.thermal_1)
 
-        # Note: if we label b, c, b', c' in the following way,
-        #       the order of b, c in density operators will be kept after mixing
+        # 1. Note: if we label b, c, b', c' in the following way,
+        #    the order of b, c in density operators will be kept after mixing
         #          c
         #         \
         #  b --->  \ ---> b'
         #           \
         #          c'
-        # |b>|c> --> mixing --> |b'>|c'>
+        # |b>|c> --> mixing --> |b'>|c'> (b' is on the 2nd of the density matrix rho_abc)
         # b' = cos(s) b + sin(s) c
-        # So we set a low transmission rate
-        # xi = np.arcsin(np.sqrt(self.reflectance))
-        # So 'self.reflectance' is actually transmission rate !!!
+        # So we set a low transmission rate.
+        # 'self.reflectance' is actually transmission rate !!!
+        # Note finished.
 
-        # Additional note for the other labeling method
+        # xi = np.arcsin(np.sqrt(self.reflectance))
+
+        # 2. Note for the other labeling method
         #          c
         #         \
         #  b --->  \ ---> c'
         #           \
         #          b'
-        # |b>|c> --> mixing --> |c'>|b'>
+        # |b>|c> --> mixing --> |c'>|b'> (b' is on the 3rd of the density matrix rho_abc)
         # b' = cos(s) c - sin(s) b
         # Now we should set low reflectance.
         xi = np.arcsin(np.sqrt(self.reflectance))
-
 
         # state A unchanged, tm_mixing acted on state B and thermal
         op = qu.tensor(qu.qeye(self.n_max), l2m.tm_mix(xi, self.n_max))
@@ -140,8 +141,7 @@ class QIExpr(object):
 
         # Notice that we kept 0, and 1, as the order of a, b, c is kept after
         # mixing when we use the second labeling method
-        return rho_1.ptrace([0, 2])  # keep A and B (index 0, 1)
-
+        return rho_1.ptrace([0, 2])  # keep A and B' (index 0, 2 for the second labeling method)
 
     def run_expr(self, qcb_approx=False):
         """
