@@ -18,10 +18,10 @@ def basic_attributes(n_max, divides):
 
     lambdas = {'TMSS': np.linspace(0.001, 0.901, divides),
                'PS': np.linspace(0.001, 0.751, divides),
-               'PA': np.linspace(0.001, 0.751, divides),
-               'PSA': np.linspace(0.001, 0.701, divides),
-               'PAS': np.linspace(0.001, 0.651, divides),
-               'PCS': np.linspace(0.001, 0.801, divides)}
+               'PA': np.linspace(0.001, 0.701, divides),
+               'PSA': np.linspace(0.001, 0.601, divides),
+               'PAS': np.linspace(0.001, 0.551, divides),
+               'PCS': np.linspace(0.001, 0.701, divides)}
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
     @log
@@ -50,12 +50,12 @@ def basic_attributes_2(n_max, divides):
     lasers = {'TMSS': laser.TMSS, 'PS': laser.PS, 'PA': laser.PA,
               'PSA': laser.PSA, 'PAS': laser.PAS, 'PCS': laser.PCS}
 
-    lambdas = {'TMSS': np.linspace(0.001, 0.201, divides),
-               'PS': np.linspace(0.001, 0.201, divides),
-               'PA': np.linspace(0.001, 0.201, divides),
-               'PSA': np.linspace(0.001, 0.201, divides),
-               'PAS': np.linspace(0.001, 0.201, divides),
-               'PCS': np.linspace(0.001, 0.201, divides)}
+    lambdas = {'TMSS': np.linspace(0.001, 0.901, divides),
+               'PS': np.linspace(0.001, 0.751, divides),
+               'PA': np.linspace(0.001, 0.701, divides),
+               'PSA': np.linspace(0.001, 0.601, divides),
+               'PAS': np.linspace(0.001, 0.551, divides),
+               'PCS': np.linspace(0.001, 0.701, divides)}
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
     @log

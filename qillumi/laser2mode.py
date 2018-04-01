@@ -159,6 +159,12 @@ class PAS(LaserTwoMode):
         # print("PAS aver n: {}, {}".format(self.num, self.exact_num))
 
 
+# class PCS_sym_etgl(LaserTwoMode):
+#     def __int__(self, l, n_max):
+#         super.__init__(l, n_max)
+#
+
+
 class PCS(LaserTwoMode):
     def __init__(self, l, n_max, rs):
         """
