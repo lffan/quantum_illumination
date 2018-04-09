@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 
 import qillumi.laser2mode as laser
-from qillumi.qi import QIExpr
 from qillumi.utils import log
 
 

@@ -41,7 +41,7 @@ class LaserTwoMode(object):
             raise ValueError("N must be a positive integer.")
 
     def get_attrs(self):
-        return {'State': self.state_name, 'lambda': self.lmd, 'Exact_N': self.exact_num,
+        return {'State': self.state_name, 'sqz': np.arctanh(self.lmd), 'lambda': self.lmd, 'Exact_N': self.exact_num,
                 'Aver_N': self.num, 'A_aver_N': self.num / 2, 'B_aver_N': self.num / 2,
                 'VN_Entropy': self.entanglement}
 
@@ -196,7 +196,7 @@ class PCS(LaserTwoMode):
         # print("PCS aver n: {}".format(self.num))
 
     def get_attrs(self):
-        return {'State': self.state_name, 'lambda': self.lmd,
+        return {'State': self.state_name, 'sqz': np.arctanh(self.lmd), 'lambda': self.lmd,
                 'Aver_N': self.num, 'A_aver_N': self.a_num, 'B_aver_N': self.b_num,
                 'VN_Entropy': self.entanglement,
                 'ra': self.rs[0], 'rb': self.rs[1]}
@@ -206,6 +206,17 @@ class PCS(LaserTwoMode):
         create a PCS state
         """
         ra, rb = rs
+        if ra > 1:
+            if ra - 1 < 1e-6:
+                ra = 1
+            else:
+                raise ValueError("ra cannot be larger than 1.0")
+        if rb > 1:
+            if rb - 1 < 1e-6:
+                rb = 1
+            else:
+                raise ValueError("rb cannot be larger than 1.0")
+
         ta = np.sqrt(1 - ra ** 2)
         tb = np.sqrt(1 - rb ** 2)
         nums = np.arange(n_max)
