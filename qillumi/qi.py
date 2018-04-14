@@ -161,7 +161,7 @@ class QIExpr(object):
         Return some useful information
         """
         laser_attrs = self.laser.get_attrs()
-        expr_attrs = {'Nth': self.nth, 'R': self.reflectance,
+        expr_attrs = {'nmax': self.n_max, 'Nth': self.nth, 'R': self.reflectance,
                       'Helstrom_Bound': self.qhb, 'Chernoff_Bound': self.qcb[1],
                       'optimal_s': np.round(self.qcb[0], 6)}
         return {**laser_attrs, **expr_attrs}
@@ -246,8 +246,10 @@ def qu_chernoff(rho0, rho1, approx=False):
         # s = 0.5
         return 0.5, (rho0.sqrtm() * rho1.sqrtm()).tr().real
     else:
-        res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
-                       method='Nelder-Mead', options={'disp': False})
+        # res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
+        #                method='Nelder-Mead', options={'disp': False})
+        res = minimize(qcb_s, np.array([0.5]), args=(rho0, rho1,),
+                       method='L-BFGS-B', bounds=[(0, 1)])
         s = res.x[0]
         if 0 <= s <= 1:
             return s, qcb_s(s, rho0, rho1)

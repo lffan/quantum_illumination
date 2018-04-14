@@ -3,15 +3,28 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
+import qillumi.laser2mode as laser
 from qillumi.qi import QIExpr
 from qillumi.utils import log
+
+from scipy.optimize import minimize
+
+
+def etgl_sym(r, l, n_max):
+    state = laser.PCS(l, n_max, (r[0], r[0]))
+    return - state.entanglement
+
+
+def etgl_asym(r, l, n_max):
+    state = laser.PCS(l, n_max, (r[0], r[1]))
+    return - state.entanglement
 
 
 def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
     # nss = np.linspace(0.01, 1, nss_divides)
     # lambdas = np.sqrt(nss / (1.0 + nss))
     # divides: divides lambda
-    cols = ['Nth', 'R', 'State', 'lambda', 'Aver_N',
+    cols = ['nmax', 'Nth', 'R', 'State', 'lambda', 'Aver_N',
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
@@ -22,7 +35,7 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
                'PSA': np.linspace(0.001, 0.601, divides),
                'PAS': np.linspace(0.001, 0.551, divides),
                'PCS': np.linspace(0.001, 0.701, divides)}
-    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
+    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS')
     # names = ('TMSS', 'PS', 'PSA')
 
     expr = QIExpr(n_max=n_max)
@@ -33,7 +46,15 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
         if s_name != 'PCS':
             expr.set_input_laser(s_name, l)
         else:
-            expr.set_input_laser('PCS', l, rs=(0.4, 0.4))
+            res1 = minimize(etgl_asym, np.array([0.2, 0.9]), args=(l, n_max),
+                           method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+            res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
+                            method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+            res = res1 if res1.fun < res2.fun else res2
+            ra, rb = res.x[0], res.x[1]
+            if (1 - 1e-6 < ra < 1 + 1e-6) and (1 - 1e-6 < rb < 1 + 1e-6):
+                ra, rb = 0, 0
+            expr.set_input_laser('PCS', l, rs=(ra, rb))
 
     for name in names:
         for lmd in lambdas[name]:
@@ -42,16 +63,16 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
                 expr.run_expr(qcb_approx=qcb_approx)
             except Exception as e:
                 print("%s" % str(e))
-                write_data_to_file(df, nth, divides, cols)
+                write_data_to_file(df, n_max, nth, divides, cols)
             new_df = pd.DataFrame.from_dict({'res': expr.get_results()}, orient='index')
             df = df.append(new_df)
 
-    write_data_to_file(df, nth, divides, cols)
+    write_data_to_file(df, n_max, nth, divides, cols)
 
 
-def write_data_to_file(df, nth, nss_divides, cols):
-    filename = "../output/data/expr_3_nbar_nth_{}_g_{}_{}.csv" \
-        .format(nth, nss_divides, datetime.today().strftime('%m-%d'))
+def write_data_to_file(df, n_max, nth, nss_divides, cols):
+    filename = "../output/data/expr_3_qi_nmax_{}_nth_{}_g_{}_{}.csv" \
+        .format(n_max, nth, nss_divides, datetime.today().strftime('%m-%d'))
     with open(filename, 'w') as file:
         file.write("# Quantum Illumination Experiment\n")
         file.write("# Experiment for all states vs lambda.\n")
@@ -64,6 +85,6 @@ if __name__ == "__main__":
     start_time = time.time()
     # expr_three_qhb_vs_energy(divides=11, n_max=24, nth=0.1, qcb_approx=True)
     # expr_three_qhb_vs_energy(divides=51, n_max=24, nth=0.1, qcb_approx=True)
-    # expr_three_qhb_vs_energy(divides=11, n_max=24, nth=1.0, qcb_approx=True)
-    expr_three_qhb_vs_energy(divides=51, n_max=32, nth=1.0, qcb_approx=True)
+    # expr_three_qhb_vs_energy(divides=51, n_max=24, nth=1.0, qcb_approx=True)
+    expr_three_qhb_vs_energy(divides=101, n_max=32, nth=1.0, qcb_approx=True)
     print("--- %s seconds ---" % (time.time() - start_time))

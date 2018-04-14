@@ -8,14 +8,16 @@ from qillumi.utils import log
 
 
 def basic_pcs_attributes(n_max, l_divides, r_divides):
-    cols = ['State', 'lambda', 'Exact_N', 'Aver_N', 'VN_Entropy',
-            'A_aver_N', 'B_aver_N', 'ra', 'rb']
+    cols = ['nmax', 'State', 'sqz', 'lambda', 'Exact_N', 'Aver_N',
+            'VN_Entropy', 'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
 
     lasers = {'TMSS': laser.TMSS, 'PS': laser.PS, 'PA': laser.PA,
               'PSA': laser.PSA, 'PAS': laser.PAS, 'PCS': laser.PCS}
 
-    lambdas = {'PCS': np.linspace(0.001, 0.751, l_divides)}
+    ss = {'PCS': np.linspace(1e-6, 1.0 + 1e-6, l_divides)}
+    lambdas = {'PCS': np.tanh(ss['PCS'])}
+    # lambdas = {'PCS': np.linspace(0.001, 0.751, l_divides)}
     rss = np.linspace(0.0, 1.0, r_divides)
     names = ('PCS',)
 
@@ -35,13 +37,13 @@ def basic_pcs_attributes(n_max, l_divides, r_divides):
                 new_df = pd.DataFrame.from_dict({'res': state.get_attrs()}, orient='index')
                 df = df.append(new_df)
 
-    df.to_csv("../output/data/expr_4_pcs_attributes_{:d}x{:d}_{}.csv"
-              .format(l_divides, r_divides, datetime.today().strftime('%m-%d')),
+    df.to_csv("../output/data/expr_4_pcs_nmax_{:d}_{:d}x{:d}_{}.csv"
+              .format(n_max, l_divides, r_divides, datetime.today().strftime('%m-%d')),
               index=False, columns=cols)
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    basic_pcs_attributes(n_max=32, l_divides=101, r_divides=201)
+    basic_pcs_attributes(n_max=32, l_divides=201, r_divides=201)
     print("--- %s seconds ---" % (time.time() - start_time))
 
