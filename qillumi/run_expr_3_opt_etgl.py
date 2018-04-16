@@ -36,7 +36,7 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
                'PAS': np.linspace(0.001, 0.551, divides),
                'PCS': np.linspace(0.001, 0.701, divides)}
     names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS')
-    # names = ('TMSS', 'PS', 'PSA')
+    # names = ('PCS',)
 
     expr = QIExpr(n_max=n_max)
     expr.set_environment(reflectance=0.01, nth=nth)
@@ -47,7 +47,7 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
             expr.set_input_laser(s_name, l)
         else:
             res1 = minimize(etgl_asym, np.array([0.2, 0.9]), args=(l, n_max),
-                           method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+                            method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
             res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
                             method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
             res = res1 if res1.fun < res2.fun else res2
@@ -71,7 +71,7 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
 
 
 def write_data_to_file(df, n_max, nth, nss_divides, cols):
-    filename = "../output/data/expr_3_qi_nmax_{}_nth_{}_g_{}_{}.csv" \
+    filename = "../output/data/expr_3_qi_nmax_{}_nth_{}_g_{}_{}_opt_etgl.csv" \
         .format(n_max, nth, nss_divides, datetime.today().strftime('%m-%d'))
     with open(filename, 'w') as file:
         file.write("# Quantum Illumination Experiment\n")
@@ -81,10 +81,17 @@ def write_data_to_file(df, n_max, nth, nss_divides, cols):
     df.to_csv(filename, index=False, columns=cols, mode='a')
 
 
+def special_pcs(n_max, nth):
+    expr = QIExpr(n_max=n_max)
+    expr.set_environment(reflectance=0.01, nth=nth)
+    expr.set_input_laser('PCS', lmd=0.2985, rs=(0.4472107216, 1.0))
+    expr.run_expr(qcb_approx=True)
+    print(expr.get_results())
+
+
 if __name__ == "__main__":
     start_time = time.time()
-    # expr_three_qhb_vs_energy(divides=11, n_max=24, nth=0.1, qcb_approx=True)
     # expr_three_qhb_vs_energy(divides=51, n_max=24, nth=0.1, qcb_approx=True)
-    # expr_three_qhb_vs_energy(divides=51, n_max=24, nth=1.0, qcb_approx=True)
-    expr_three_qhb_vs_energy(divides=101, n_max=32, nth=1.0, qcb_approx=True)
+    expr_three_qhb_vs_energy(divides=11, n_max=32, nth=1.0, qcb_approx=True)
     print("--- %s seconds ---" % (time.time() - start_time))
+    # special_pcs(n_max=32, nth=1.0)

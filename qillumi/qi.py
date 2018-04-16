@@ -156,6 +156,21 @@ class QIExpr(object):
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)
 
+    def run_expr_qcb(self, qcb_approx=False):
+        """
+        Run the experiment according to the parameters setup
+        """
+        rho0 = self.__evolve_rho0()
+        rho1 = self.__evolve_rho1()
+        self.qhb = 0
+        qcb = qu_chernoff(rho0, rho1, approx=qcb_approx)
+        # qcb = (0.5, 0.5) # for test
+        self.qcb[0] = qcb[0]
+        self.qcb[1] = upper_bound(qcb[1], M=1)
+        # print(self.qhb, self.qcb)
+
+
+
     def get_results(self):
         """
         Return some useful information
@@ -165,6 +180,16 @@ class QIExpr(object):
                       'Helstrom_Bound': self.qhb, 'Chernoff_Bound': self.qcb[1],
                       'optimal_s': np.round(self.qcb[0], 6)}
         return {**laser_attrs, **expr_attrs}
+
+    def results_string(self):
+        cols = ['nmax', 'Nth', 'R', 'State', 'sqz', 'lambda', 'Aver_N',
+                'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+                'A_aver_N', 'B_aver_N']
+        if self.laser.state_name == 'PCS':
+            cols += ['ra', 'rb']
+        res = self.get_results()
+        res_string = ','.join([str(res[key]) for key in cols])
+        return res_string
 
 
 def power(qstate, power, sparse=False, tol=0, maxiter=100000):
@@ -292,7 +317,8 @@ def run(n_max, nth, ns, rflct, rs):
         else:
             expr.set_input_laser('PCS', lmd, rs)
         expr.run_expr()
-        print(expr.get_results())
+        print(expr.results_string())
+        # print(expr.get_results())
 
 
 # for test only

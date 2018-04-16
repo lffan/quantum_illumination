@@ -44,6 +44,6 @@ def basic_pcs_attributes(n_max, l_divides, r_divides):
 
 if __name__ == "__main__":
     start_time = time.time()
-    basic_pcs_attributes(n_max=32, l_divides=201, r_divides=201)
+    basic_pcs_attributes(n_max=32, l_divides=10, r_divides=10)
     print("--- %s seconds ---" % (time.time() - start_time))
 

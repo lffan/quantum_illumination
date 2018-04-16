@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cebbd842-c5ab-4550-b7dd-1b699b540703" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/qillumi/run_expr_0.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes_(PCS_opt).ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumi/run_basic_attr.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Experiment_3_Perr_vs_AverN-Copy1.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ipynbs/Experiment_4_Symmetrical_PCS_Attributes.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/qillumi/run_expr_1.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qillumi/run_expr_0.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qillumi/run_expr_2.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qillumi/run_expr_3.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qillumi/run_expr_4.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_2_Optimal_PCS.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_2_Optimal_PCS.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_4_Symmetrical_PCS_Attributes.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_4_Symmetrical_PCS_Attributes.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/laser2mode.py" afterPath="$PROJECT_DIR$/qillumi/laser2mode.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes_(opt_asymmetrical_PCS).ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes_(opt_asymmetrical_PCS).ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes_(opt_symmetrical_PCS).ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_0_Basic_Attributes_(opt_symmetrical_PCS).ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_2_Optimal_PCS-test.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_2_Optimal_PCS-test.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipynbs/Experiment_4_Symmetrical_PCS_Attributes-test.ipynb" afterPath="$PROJECT_DIR$/ipynbs/Experiment_4_Symmetrical_PCS_Attributes-test.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/qi.py" afterPath="$PROJECT_DIR$/qillumi/qi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/run_expr_2.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/run_expr_3.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qillumi/run_expr_4.py" afterPath="$PROJECT_DIR$/qillumi/run_expr_4.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,54 +24,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="run_expr_3.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run_expr_2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="52" column="77" lean-forward="false" selection-start-line="52" selection-start-column="77" selection-end-line="52" selection-end-column="77" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="laser2mode.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3808">
-              <caret line="225" column="37" lean-forward="false" selection-start-line="225" selection-start-column="37" selection-end-line="225" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/qillumi/qi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4148">
-              <caret line="250" column="43" lean-forward="false" selection-start-line="250" selection-start-column="43" selection-end-line="250" selection-end-column="43" />
-              <folding>
-                <element signature="e#141#159#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.4090909">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="run_expr_5_pcs_all_scan.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/qillumi/run_expr_5_pcs_all_scan.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="213">
+                  <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="run_expr_3_opt_qcb.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_qcb.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="284">
+                  <caret line="78" column="41" lean-forward="false" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="run_expr_4_pcs_sym_scan.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="71">
+                  <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="run_expr_3_opt_etgl.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="73" column="72" lean-forward="false" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="run_expr_2_pcs_plot.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="519">
+                  <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -93,20 +106,25 @@
       <list>
         <option value="$PROJECT_DIR$/ipynbs/.ipynb_checkpoints/test.ipynb" />
         <option value="$PROJECT_DIR$/qillumi/run_basic_attr.py" />
-        <option value="$PROJECT_DIR$/qillumi/laser2mode.py" />
-        <option value="$PROJECT_DIR$/qillumi/run_expr_4.py" />
-        <option value="$PROJECT_DIR$/qillumi/qi.py" />
-        <option value="$PROJECT_DIR$/qillumi/run_expr_0.py" />
         <option value="$PROJECT_DIR$/qillumi/run_expr_2.py" />
         <option value="$PROJECT_DIR$/qillumi/run_expr_3.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_4.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_0.py" />
+        <option value="$PROJECT_DIR$/qillumi/laser2mode.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_3_opt_qcb.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_5_pcs_all_scan.py" />
+        <option value="$PROJECT_DIR$/qillumi/qi.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py" />
+        <option value="$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="580" />
-    <option name="y" value="24" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="367" />
+    <option name="y" value="85" />
     <option name="width" value="1340" />
-    <option name="height" value="1176" />
+    <option name="height" value="1140" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -159,6 +177,11 @@
   <component name="PropertiesComponent">
     <property name="add_unversioned_files" value="$PROJECT_DIR$/ipynbs/.ipynb_checkpoints/test.ipynb" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/qillumi" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -171,8 +194,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.run_expr_3">
-    <configuration name="run_basic_attr" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.run_expr_2_pcs_plot">
+    <configuration name="run_expr_0" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -184,12 +207,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="quantum_illumination" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_0.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="run_expr_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="run_expr_2_pcs_plot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -201,12 +224,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="quantum_illumination" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="run_expr_3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="run_expr_3_opt_qcb" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -218,7 +241,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="quantum_illumination" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_3_opt_qcb.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -235,23 +258,42 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="quantum_illumination" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.run_basic_attr" />
+    <configuration name="run_expr_5_pcs_all_scan" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qillumi" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="quantum_illumination" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qillumi/run_expr_5_pcs_all_scan.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.run_expr_3_opt_qcb" />
       <item index="1" class="java.lang.String" itemvalue="Python.run_expr_4" />
-      <item index="2" class="java.lang.String" itemvalue="Python.run_expr_2" />
-      <item index="3" class="java.lang.String" itemvalue="Python.run_expr_3" />
+      <item index="2" class="java.lang.String" itemvalue="Python.run_expr_0" />
+      <item index="3" class="java.lang.String" itemvalue="Python.run_expr_5_pcs_all_scan" />
+      <item index="4" class="java.lang.String" itemvalue="Python.run_expr_2_pcs_plot" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.run_expr_3" />
-        <item index="1" class="java.lang.String" itemvalue="Python.run_expr_2" />
-        <item index="2" class="java.lang.String" itemvalue="Python.run_basic_attr" />
-        <item index="3" class="java.lang.String" itemvalue="Python.run_expr_4" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.run_expr_2_pcs_plot" />
+        <item index="1" class="java.lang.String" itemvalue="Python.run_expr_0" />
+        <item index="2" class="java.lang.String" itemvalue="Python.run_expr_5_pcs_all_scan" />
+        <item index="3" class="java.lang.String" itemvalue="Python.run_expr_3_opt_qcb" />
+        <item index="4" class="java.lang.String" itemvalue="Python.run_expr_4" />
       </list>
     </recent_temporary>
   </component>
@@ -269,15 +311,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="580" y="24" width="1340" height="1176" extended-state="4" />
+    <frame x="55" y="-6" width="1865" height="1206" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16460587" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1170973" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2632558" sideWeight="0.41726223" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28421053" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26411483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27627906" sideWeight="0.49807587" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2632558" sideWeight="0.58273774" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -296,27 +338,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/qillumi/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -324,10 +351,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
           <caret line="90" column="43" lean-forward="false" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -349,19 +379,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="34" column="37" lean-forward="false" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="53" column="68" lean-forward="false" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="68" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -370,15 +403,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -390,10 +424,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
           <caret line="90" column="43" lean-forward="false" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -423,20 +460,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="53" column="66" lean-forward="false" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="68" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="63" column="40" lean-forward="false" selection-start-line="63" selection-start-column="40" selection-end-line="63" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -444,15 +484,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -464,10 +505,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="45" column="64" lean-forward="false" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -489,20 +533,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="53" column="66" lean-forward="false" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="68" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="63" column="40" lean-forward="true" selection-start-line="63" selection-start-column="40" selection-end-line="63" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -510,15 +557,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -530,10 +578,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="45" column="64" lean-forward="true" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -559,23 +610,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="45" column="88" lean-forward="true" selection-start-line="45" selection-start-column="88" selection-end-line="45" selection-end-column="88" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="58" column="53" lean-forward="false" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -604,19 +659,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="58" column="53" lean-forward="true" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -647,69 +705,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/qillumi/run_expr_1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="547">
           <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="52" column="77" lean-forward="false" selection-start-line="52" selection-start-column="77" selection-end-line="52" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/qillumi/laser2mode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3808">
-          <caret line="225" column="37" lean-forward="false" selection-start-line="225" selection-start-column="37" selection-end-line="225" selection-end-column="37" />
+        <state relative-caret-position="476">
+          <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_qcb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="78" column="41" lean-forward="false" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_4_pcs_sym_scan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/qillumi/qi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4148">
-          <caret line="250" column="43" lean-forward="false" selection-start-line="250" selection-start-column="43" selection-end-line="250" selection-end-column="43" />
+        <state relative-caret-position="553">
+          <caret line="164" column="20" lean-forward="true" selection-start-line="164" selection-start-column="20" selection-end-line="164" selection-end-column="20" />
           <folding>
             <element signature="e#141#159#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_3_opt_etgl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="73" column="72" lean-forward="false" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_0_basic_opt_pcs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_2_pcs_plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qillumi/run_expr_5_pcs_all_scan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
