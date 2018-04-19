@@ -22,6 +22,12 @@ def etgl_asym(r, l, n_max):
     return - state.entanglement
 
 
+def qcb_sym(r, lmd, expr):
+    expr.set_input_laser('PCS', lmd=lmd, rs=(r[0], r[0]))
+    expr.run_expr(qcb_approx=True)
+    return expr.get_results()['Chernoff_Bound']
+
+
 def qcb_asym(r, lmd, expr):
     expr.set_input_laser('PCS', lmd=lmd, rs=(r[0], r[1]))
     expr.run_expr(qcb_approx=True)
@@ -82,17 +88,38 @@ def expr_three_qhb_vs_energy(method, nth, n_max, div1, div2, qcb_approx=True):
                 continue
 
 
-# def special_pcs(n_max, nth):
-#     expr = QIExpr(n_max=n_max)
-#     expr.set_environment(reflectance=0.01, nth=nth)
-#     expr.set_input_laser('PCS', lmd=0.2985, rs=(0.4472107216, 1.0))
-#     expr.run_expr(qcb_approx=True)
-#     print(expr.get_results())
+def find_optimal_etgl(n_max, ns, nth):
+    l = np.sqrt(ns / (1 + ns))
+    expr = QIExpr(n_max=n_max)
+    expr.set_environment(reflectance=0.01, nth=nth)
+
+    # # res1 = minimize(qcb_asym, np.array([0.2, 0.8]), args=(l, expr),
+    # #                 method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+    # res2 = minimize(qcb_asym, np.array([0.2, 0.2]), args=(l, expr),
+    #                 method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+    # res3 = minimize(qcb_sym, np.array([0.2]), args=(l, expr),
+    #                 method='L-BFGS-B', bounds=[(0, 1)])
+    # # print(res1.fun, res1.x)
+    # print(res2.fun, res2.x)
+
+    expr.set_input_laser('PCS', lmd=l, rs=(0.11755415, 0.94959852))
+    expr.run_expr()
+    print(expr.get_results())
+    # print(res3.fun, res3.x)
+
+
+def special_pcs(n_max, nth):
+    expr = QIExpr(n_max=n_max)
+    expr.set_environment(reflectance=0.01, nth=nth)
+    expr.set_input_laser('PCS', lmd=0.099503719020998915, rs=(1.0, 0.14019005))
+    expr.run_expr(qcb_approx=True)
+    print(expr.get_results())
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    expr_three_qhb_vs_energy(method='L-BFGS-B', div1=46, div2=8, n_max=24, nth=1.0, qcb_approx=True)
+    # expr_three_qhb_vs_energy(method='L-BFGS-B', div1=46, div2=8, n_max=24, nth=1.0, qcb_approx=True)
     # expr_three_qhb_vs_energy(method='TNC', div1=91, div2=25, n_max=24, nth=1.0, qcb_approx=True)
+    # find_optimal_etgl(n_max=32, ns=0.01, nth=1.0)
     print("--- %s seconds ---" % (time.time() - start_time))
-    # special_pcs(n_max=32, nth=1.0)
+    special_pcs(n_max=32, nth=1.0)

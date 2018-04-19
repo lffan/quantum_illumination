@@ -15,9 +15,9 @@ def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, l_divides, r_divides, qcb_approx=T
 
     points = np.linspace(0, 1, r_divides)
     rss = [(ra, rb) for ra in points for rb in points]
-    lmds = np.linspace(0.01, 0.41, l_divides)
+    lmds = np.linspace(0.05, 0.37, l_divides)
 
-    # lmd = np.sqrt(ns / (1 + ns))
+    # l1 = np.sqrt(ns / (1 + ns))
 
     expr = QIExpr(n_max=n_max)
     expr.set_environment(reflectance=rflct, nth=nth)
@@ -51,6 +51,6 @@ def expr_two_pcs_vs_rs(n_max, nth, ns, rflct, l_divides, r_divides, qcb_approx=T
 
 if __name__ == "__main__":
     start_time = time.time()
-    expr_two_pcs_vs_rs(n_max=24, nth=1.0, ns=0.01, rflct=0.01, l_divides=6, r_divides=51, qcb_approx=True)
+    expr_two_pcs_vs_rs(n_max=24, nth=1.0, ns=0.01, rflct=0.01, l_divides=5, r_divides=51, qcb_approx=True)
     # expr_two_pcs_vs_rs(n_max=24, nth=1, ns=0.01, rflct=0.01, grid_divides=51, qcb_approx=True)
     print("--- %s seconds ---" % (time.time() - start_time))

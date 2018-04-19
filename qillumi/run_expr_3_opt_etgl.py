@@ -34,9 +34,9 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
                'PA': np.linspace(0.001, 0.701, divides),
                'PSA': np.linspace(0.001, 0.601, divides),
                'PAS': np.linspace(0.001, 0.551, divides),
-               'PCS': np.linspace(0.001, 0.701, divides)}
-    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS')
-    # names = ('PCS',)
+               'PCS': np.linspace(0.3545, 0.701, divides)}
+    # names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS')
+    names = ('PCS',)
 
     expr = QIExpr(n_max=n_max)
     expr.set_environment(reflectance=0.01, nth=nth)
@@ -46,14 +46,16 @@ def expr_three_qhb_vs_energy(nth, n_max, divides, qcb_approx=True):
         if s_name != 'PCS':
             expr.set_input_laser(s_name, l)
         else:
-            res1 = minimize(etgl_asym, np.array([0.2, 0.9]), args=(l, n_max),
+            res = minimize(etgl_asym, np.array([0.2, 0.9]), args=(l, n_max),
                             method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
-            res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
-                            method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
-            res = res1 if res1.fun < res2.fun else res2
+            if l < 0.2:
+                res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
+                                method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+                if res2.fun < res.fun:
+                    res = res2
             ra, rb = res.x[0], res.x[1]
-            if (1 - 1e-6 < ra < 1 + 1e-6) and (1 - 1e-6 < rb < 1 + 1e-6):
-                ra, rb = 0, 0
+            if (- 1e-6 < ra < 1e-6) and (- 1e-6 < rb < 1e-6):
+                ra, rb = 1, 1
             expr.set_input_laser('PCS', l, rs=(ra, rb))
 
     for name in names:
@@ -92,6 +94,6 @@ def special_pcs(n_max, nth):
 if __name__ == "__main__":
     start_time = time.time()
     # expr_three_qhb_vs_energy(divides=51, n_max=24, nth=0.1, qcb_approx=True)
-    expr_three_qhb_vs_energy(divides=11, n_max=32, nth=1.0, qcb_approx=True)
+    expr_three_qhb_vs_energy(divides=100, n_max=32, nth=1.0, qcb_approx=True)
     print("--- %s seconds ---" % (time.time() - start_time))
     # special_pcs(n_max=32, nth=1.0)

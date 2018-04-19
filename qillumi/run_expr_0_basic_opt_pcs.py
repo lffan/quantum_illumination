@@ -36,10 +36,11 @@ def basic_attributes(n_max, divides):
                'PA': np.linspace(0.001, 0.601, divides),
                'PSA': np.linspace(0.001, 0.501, divides),
                'PAS': np.linspace(0.001, 0.451, divides),
-               'PCS': np.linspace(0.001, 0.601, divides)}
+               'PCS': np.linspace(0.3545, 0.701, divides)}
 
     # names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
-    names = ('TMSS', 'PS', 'PA')
+    # names = ('TMSS', 'PS', 'PA')
+    names = ('PCS',)
 
     @log
     def create_laser(s_name, l):
@@ -48,11 +49,10 @@ def basic_attributes(n_max, divides):
         else:
             res = minimize(etgl_asym, np.array([0.2, 0.85]), args=(l, n_max),
                            method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
-            if l > 0.3:
-                res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
-                                method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
-                if res2.fun < res.fun:
-                    res = res2
+            res2 = minimize(etgl_asym, np.array([0.3, 0.3]), args=(l, n_max),
+                            method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+            if res2.fun < res.fun:
+                res = res2
             ra, rb = res.x[0], res.x[1]
             if (-1e-6 < ra < 1e-6) and (-1e-6 < rb < 1e-6):
                 ra, rb = 1, 1
@@ -77,7 +77,25 @@ def basic_attributes(n_max, divides):
                 file.write(out_string)
 
 
+def find_optimal_etgl(ns, n_max, l=None):
+    if not l:
+        l = np.sqrt(ns / (1 + ns))
+    res1 = minimize(etgl_asym, np.array([0.2, 0.8]), args=(l, n_max),
+                    method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+    res2 = minimize(etgl_asym, np.array([0.3, 0.6]), args=(l, n_max),
+                    method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+    res3 = minimize(etgl_asym, np.array([0.9, 0.9]), args=(l, n_max),
+                    method='L-BFGS-B', bounds=[(0, 1), (0, 1)])
+    print(res1.fun, res1.x)
+    print(res2.fun, res2.x)
+    print(res3.fun, res3.x)
+
+
 if __name__ == "__main__":
     start_time = time.time()
-    basic_attributes(n_max=24, divides=101)
+    find_optimal_etgl(ns=0.01, n_max=48, l=0.45)
+    # basic_attributes(n_max=64, divides=100)
     print("--- %s seconds ---" % (time.time() - start_time))
+
+    # tmss = laser.TMSS(0.0995037, n_max=24)
+    # tmss.num()
