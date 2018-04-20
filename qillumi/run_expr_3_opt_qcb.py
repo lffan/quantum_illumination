@@ -42,9 +42,11 @@ def expr_three_qhb_vs_energy(method, nth, n_max, div1, div2, qcb_approx=True):
             'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
             'A_aver_N', 'B_aver_N', 'ra', 'rb']
     df = pd.DataFrame(columns=cols)
+    l1 = np.sqrt(0.01 / (1 + 0.01))
+    lmds = (l1, )
 
-    lmds = np.append(np.linspace(0.002, 0.452, div1), np.linspace(0.462, 0.602, div2))
-    names = ('PCS',)
+    # lmds = np.append(np.linspace(0.002, 0.452, div1), np.linspace(0.462, 0.602, div2))
+    names = ('TMSS', 'PS', 'PA', 'PSA', 'PAS', 'PCS')
 
     expr = QIExpr(n_max=n_max)
     expr.set_environment(reflectance=0.01, nth=nth)
@@ -54,18 +56,18 @@ def expr_three_qhb_vs_energy(method, nth, n_max, div1, div2, qcb_approx=True):
         if s_name != 'PCS':
             expr.set_input_laser(s_name, l)
         else:
-            res = minimize(qcb_asym, np.array([0.2, 0.8]), args=(l, expr),
-                           method=method, bounds=[(0, 1), (0, 1)])
-            if l > 0.3:
-                res2 = minimize(qcb_asym, np.array([0.8, 0.8]), args=(l, expr),
-                                method=method, bounds=[(0, 1), (0, 1)])
-                if res2.fun < res:
-                    res = res2
-            ra, rb = res.x[0], res.x[1]
-            print("ra: {}, rb: {}".format(ra, rb))
-            if (- 1e-6 < ra < 1e-6) and (- 1e-6 < rb < 1e-6):
-                ra, rb = 1, 1
-            expr.set_input_laser('PCS', l, rs=(ra, rb))
+            # res = minimize(qcb_asym, np.array([0.2, 0.8]), args=(l, expr),
+            #                method=method, bounds=[(0, 1), (0, 1)])
+            # if l > 0.3:
+            #     res2 = minimize(qcb_asym, np.array([0.8, 0.8]), args=(l, expr),
+            #                     method=method, bounds=[(0, 1), (0, 1)])
+            #     if res2.fun < res:
+            #         res = res2
+            # ra, rb = res.x[0], res.x[1]
+            # print("ra: {}, rb: {}".format(ra, rb))
+            # if (- 1e-6 < ra < 1e-6) and (- 1e-6 < rb < 1e-6):
+            #     ra, rb = 1, 1
+            expr.set_input_laser('PCS', l, rs=(0.11697, 0.948384))
 
     filename = "../output/data/expr_3_qi_nmax_{}_nth_{}_g_{}+{}_{}_opt_qcb_{}.csv"\
         .format(n_max, nth, div1, div2, datetime.today().strftime('%m-%d'), method)
@@ -77,15 +79,16 @@ def expr_three_qhb_vs_energy(method, nth, n_max, div1, div2, qcb_approx=True):
         file.write(','.join(cols) + '\n')
 
         for lmd in lmds:
-            set_laser('PCS', lmd)
-            try:
-                expr.run_expr(qcb_approx=qcb_approx)
-                # print(expr.results_string())
-                file.write(expr.results_string() + '\n')
-            except np.linalg.LinAlgError:
-                file.write('# Singular Matrix lambda: {}'.format(lmd) + '\n')
-                print("Singular Matrix")
-                continue
+            for name in names:
+                set_laser(name, lmd)
+                try:
+                    expr.run_expr(qcb_approx=qcb_approx)
+                    # print(expr.results_string())
+                    file.write(expr.results_string() + '\n')
+                except np.linalg.LinAlgError:
+                    file.write('# Singular Matrix lambda: {}'.format(lmd) + '\n')
+                    print("Singular Matrix")
+                    continue
 
 
 def find_optimal_etgl(n_max, ns, nth):
@@ -118,8 +121,8 @@ def special_pcs(n_max, nth):
 
 if __name__ == "__main__":
     start_time = time.time()
-    # expr_three_qhb_vs_energy(method='L-BFGS-B', div1=46, div2=8, n_max=24, nth=1.0, qcb_approx=True)
+    expr_three_qhb_vs_energy(method='L-BFGS-B', div1=0, div2=0, n_max=32, nth=0.1, qcb_approx=False)
     # expr_three_qhb_vs_energy(method='TNC', div1=91, div2=25, n_max=24, nth=1.0, qcb_approx=True)
     # find_optimal_etgl(n_max=32, ns=0.01, nth=1.0)
     print("--- %s seconds ---" % (time.time() - start_time))
-    special_pcs(n_max=32, nth=1.0)
+    # special_pcs(n_max=32, nth=1.0)
