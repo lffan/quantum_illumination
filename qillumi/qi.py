@@ -169,8 +169,6 @@ class QIExpr(object):
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)
 
-
-
     def get_results(self):
         """
         Return some useful information
