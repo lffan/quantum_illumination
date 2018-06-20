@@ -109,36 +109,40 @@ class QIExpr(object):
         rho_ab = qu.ket2dm(self.laser.state)
         rho_abc = qu.tensor(rho_ab, self.thermal_1)
 
-        # Note: if we label b, c, b', c' in the following way,
-        #       the order of b, c in density operators will be kept after mixing
+        # 1. Note: if we label b, c, b', c' in the following way,
+        #    the order of b, c in density operators will be kept after mixing
         #          c
         #         \
         #  b --->  \ ---> b'
         #           \
         #          c'
-        # |b>|c> --> mixing --> |b'>|c'>
+        # |b>|c> --> mixing --> |b'>|c'> (b' is on the 2nd of the density matrix rho_abc)
         # b' = cos(s) b + sin(s) c
-        # So we set a low transmission rate
-        xi = np.arccos(np.sqrt(self.reflectance))
-        # So 'self.reflectance' is actually transmission rate !!!
+        # So we set a low transmission rate.
+        # 'self.reflectance' is actually transmission rate !!!
+        # Note finished.
 
-        # Additional note for the other labeling method
+        # xi = np.arcsin(np.sqrt(self.reflectance))
+
+        # 2. Note for the other labeling method
         #          c
         #         \
         #  b --->  \ ---> c'
         #           \
         #          b'
-        # |b>|c> --> mixing --> |c'>|b'>
+        # |b>|c> --> mixing --> |c'>|b'> (b' is on the 3rd of the density matrix rho_abc)
         # b' = cos(s) c - sin(s) b
         # Now we should set low reflectance.
+        xi = np.arcsin(np.sqrt(self.reflectance))
 
         # state A unchanged, tm_mixing acted on state B and thermal
         op = qu.tensor(qu.qeye(self.n_max), l2m.tm_mix(xi, self.n_max))
         rho_1 = op * rho_abc * op.dag()
 
         # Notice that we kept 0, and 1, as the order of a, b, c is kept after
-        # mixing when we use the first labeling method
-        return rho_1.ptrace([0, 1])  # keep A and B (index 0, 1)
+
+        # mixing when we use the second labeling method
+        return rho_1.ptrace([0, 2])  # keep A and B' (index 0, 2 for the second labeling method)
 
 
     def run_expr(self, qcb_approx=False):
@@ -154,16 +158,41 @@ class QIExpr(object):
         self.qcb[1] = upper_bound(qcb[1], M=1)
         # print(self.qhb, self.qcb)
 
+
+    def run_expr_qcb(self, qcb_approx=False):
+        """
+        Run the experiment according to the parameters setup
+        """
+        rho0 = self.__evolve_rho0()
+        rho1 = self.__evolve_rho1()
+        self.qhb = 0
+        qcb = qu_chernoff(rho0, rho1, approx=qcb_approx)
+        # qcb = (0.5, 0.5) # for test
+        self.qcb[0] = qcb[0]
+        self.qcb[1] = upper_bound(qcb[1], M=1)
+        # print(self.qhb, self.qcb)
+
     def get_results(self):
         """
         Return some useful information
         """
         laser_attrs = self.laser.get_attrs()
-        expr_attrs = {'Nth': self.nth, 'R': self.reflectance,
+
+        expr_attrs = {'nmax': self.n_max, 'Nth': self.nth, 'R': self.reflectance,
+
                       'Helstrom_Bound': self.qhb, 'Chernoff_Bound': self.qcb[1],
                       'optimal_s': np.round(self.qcb[0], 6)}
         return {**laser_attrs, **expr_attrs}
 
+    def results_string(self):
+        cols = ['nmax', 'Nth', 'R', 'State', 'sqz', 'lambda', 'Aver_N',
+                'VN_Entropy', 'Helstrom_Bound', 'Chernoff_Bound', 'optimal_s',
+                'A_aver_N', 'B_aver_N']
+        if self.laser.state_name == 'PCS':
+            cols += ['ra', 'rb']
+        res = self.get_results()
+        res_string = ','.join([str(res[key]) for key in cols])
+        return res_string
 
 def power(qstate, power, sparse=False, tol=0, maxiter=100000):
     """power of a quantum operator.
@@ -244,8 +273,10 @@ def qu_chernoff(rho0, rho1, approx=False):
         # s = 0.5
         return 0.5, (rho0.sqrtm() * rho1.sqrtm()).tr().real
     else:
-        res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
-                       method='Nelder-Mead', options={'disp': False})
+        # res = minimize(qcb_s, np.array([0.3]), args=(rho0, rho1,),
+        #                method='Nelder-Mead', options={'disp': False})
+        res = minimize(qcb_s, np.array([0.5]), args=(rho0, rho1,),
+                       method='L-BFGS-B', bounds=[(0, 1)])
         s = res.x[0]
         if 0 <= s <= 1:
             return s, qcb_s(s, rho0, rho1)
@@ -288,7 +319,9 @@ def run(n_max, nth, ns, rflct, rs):
         else:
             expr.set_input_laser('PCS', lmd, rs)
         expr.run_expr()
-        print(expr.get_results())
+
+        print(expr.results_string())
+        # print(expr.get_results())
 
 
 # for test only
